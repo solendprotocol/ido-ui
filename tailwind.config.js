@@ -64,8 +64,8 @@ module.exports = {
       gray: 'var(--color-border-gray)',
     },
     fontFamily: {
-      sans: ['Manrope', 'Roboto'],
-      mono: ['ui-monospace', 'monospace'],
+      sans: ['IBM Plex Sans', 'Manrope', 'Roboto'],
+      mono: ['IBM Plex Sans', 'ui-monospace', 'monospace'],
     },
     fontSize: {
       xxs: ['10px', '10px'],

@@ -1,9 +1,11 @@
 import React from 'react'
 
+import Typography from '../typography/Typography'
+
 export const Footer: React.FC = () => {
   return (
     <footer className="px-2 sm:px-6 text-center mb-2 sm:mb-6 mt-4">
-      <h5 className="text-md sm:text-lg font-bold">Backed by</h5>
+      <Typography level="display">Backed by</Typography>
       <div className="hidden sm:block select-none">
         <div className="mt-6 flex flex-row items-end justify-center space-x-6">
           <img src="/images/backed/alameda.svg" width={216} height={44} />

@@ -2,6 +2,7 @@ import { useWallet } from '@parrotfi/wallets'
 import React, { useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
+import AboutPanel from '../components/about/AboutPanel'
 import { Button } from '../components/button'
 import { Footer } from '../components/footer'
 import { Header } from '../components/header'
@@ -14,7 +15,7 @@ import { useRefresh } from '../hooks/useRefresh'
 import useWalletStore from '../stores/useWalletStore'
 
 const Main = () => {
-  const pools = useWalletStore((s) => s.pools)
+  const pool = useWalletStore((s) => s.pools)[0]
   const { endpoint } = useWallet()
   const { loadIDO, loadingIDO, loadingError } = useIDO()
 
@@ -22,8 +23,11 @@ const Main = () => {
     loadIDO(endpoint)
   }, [endpoint.rpcURL, loadIDO])
 
+  const pools = pool ? [pool] : []
+
   return (
-    <main className="w-full flex flex-col items-center md:items-start justify-center my-4 space-y-4 sm:my-6 md:space-x-6 md:flex-row md:space-y-0">
+    <main className="gap-48 w-full flex flex-col items-center items-center justify-center my-4 space-y-4 sm:my-6 md:space-x-6 md:flex-row md:space-y-0">
+      <AboutPanel />
       {pools.map((pool, index) => (
         <PoolCard
           key={pool.publicKey.toBase58()}
@@ -32,7 +36,7 @@ const Main = () => {
         />
       ))}
       {!!loadingError && (
-        <CardBase title="Error" className="md:col-span-2">
+        <CardBase endIdo={false} title="Error" className="md:col-span-2">
           <p className="leading-snug mb-6">{loadingError}</p>
           <Button size="sm" onClick={handleReload}>
             Retry to load
@@ -40,8 +44,8 @@ const Main = () => {
         </CardBase>
       )}
       {loadingIDO &&
-        [1, 2].map((key) => (
-          <CardBase key={key} title="Loading...">
+        [1].map((key) => (
+          <CardBase endIdo={false} key={key} title="Loading...">
             <Skeleton count={3} height={90} className="mt-2" />
           </CardBase>
         ))}
@@ -56,21 +60,12 @@ const Page: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-scaffold">
       <Header />
-      <div className="w-full flex justify-center items-center overflow-hidden">
-        <img
-          className="max-w-none hidden sm:block"
-          width={1440}
-          height={500}
-          src={isStarted ? '/images/bg/d1.png' : '/images/bg/d2.png'}
-        />
-        <img
-          className="max-w-none block sm:hidden"
-          width={375}
-          height={415}
-          src={isStarted ? '/images/bg/m1.png' : '/images/bg/m2.png'}
-        />
-      </div>
-      <div className="-mt-24 sm:-mt-32">
+      <div
+        className="mb-4 py-8"
+        style={{
+          background: `url(/images/bg/market_hero.dark.svg)`,
+        }}
+      >
         {!isStarted && (
           <BigCountdown date={IDO_STARTS} onComplete={doForceRefresh} />
         )}
