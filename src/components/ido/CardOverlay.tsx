@@ -23,11 +23,12 @@ const CardOverlay: React.FC<CardOverlayProps> = ({ children, pool, title }) => {
 
   return (
     <CardBase
+      endIdo={endIdo.isBefore()}
       title={title}
       overlayContent={
         hasOverlay && (
           <div className="absolute z-10 w-full px-8 h-full flex items-center justify-center">
-            <div className="bg-white w-full p-6 rounded-3xl flex flex-col items-center space-y-3">
+            <div className="bg-white w-full p-6 rounded-sm flex flex-col items-center space-y-3">
               {notStarted && <h3>Entry Starts</h3>}
               {notRedeem && <h3>Redeem Starts</h3>}
               <PoolCountdown

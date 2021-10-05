@@ -10,6 +10,7 @@ import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
 import { calculateSupply } from '../../utils/balance'
 import { Button } from '../button'
 import NumberText from '../texts/Number'
+import Typography from '../typography/Typography'
 import PoolCountdown from './PoolCountdown'
 
 interface PoolRedeemCardProps {
@@ -83,8 +84,10 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   return (
     <div className="">
       {startRedeem.isAfter() && (
-        <div className="bg-secondary rounded-xl p-6 text-center mb-2">
-          <p className="text-sm text-secondary">Redeem starts</p>
+        <div className="bg-white p-6 text-center mb-4">
+          <Typography level="titleLabel" color="secondary" className="mb-4">
+            Redeem starts
+          </Typography>
           <PoolCountdown
             poolStatus={poolStatus}
             date={startRedeem}
@@ -92,9 +95,11 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
           />
         </div>
       )}
-      <div className="bg-secondary rounded-xl p-6 text-center">
-        <p className="text-sm text-secondary">Total raised</p>
-        <div className="flex items-center justify-center pt-2">
+      <div className="bg-white p-6 text-center">
+        <Typography level="titleLabel" color="secondary" className="mb-4">
+          Total raised
+        </Typography>
+        <div className="flex items-center justify-center pt-2 mt-2">
           <img
             alt=""
             width="20"
@@ -103,15 +108,17 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="number text-mdx"
             value={idoResult?.contributed || usdcBalance}
             defaultIfNull="N/A"
           />
         </div>
       </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Token Price</p>
-        <div className="flex items-center justify-center pt-2">
+      <div className="bg-white p-6 text-center mt-2">
+        <Typography level="titleLabel" color="secondary" className="mb-4">
+          Token price
+        </Typography>
+        <div className="flex items-center justify-center pt-2 mt-2">
           <img
             alt=""
             width="20"
@@ -120,16 +127,18 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="number text-mdx"
             value={estimatedPrice}
             defaultIfNull="N/A"
             displayDecimals={6}
           />
         </div>
       </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Your contribution</p>
-        <div className="flex items-center justify-center pt-2">
+      <div className="bg-white p-6 text-center mt-2">
+        <Typography level="titleLabel" color="secondary" className="mb-4">
+          Your contribution
+        </Typography>
+        <div className="flex items-center justify-center pt-2 mt-2">
           <img
             alt=""
             width="20"
@@ -138,24 +147,26 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="number text-mdx"
             value={contributeBalance}
             defaultIfNull="N/A"
           />
         </div>
       </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Redeemable amount</p>
-        <div className="flex items-center justify-center pt-2">
+      <div className="bg-white p-6 text-center mt-2">
+        <Typography level="titleLabel" color="secondary" className="mb-4">
+          Redeemable amount
+        </Typography>
+        <div className="flex items-center justify-center pt-2 mt-2">
           <img
             alt=""
             width="20"
             height="20"
-            src="/icons/prt.svg"
+            src="/icons/slnd.png"
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="number text-mdx"
             value={redeemablePrtAmount}
             displayDecimals={6}
             defaultIfNull="N/A"
@@ -164,11 +175,10 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
       </div>
       <Button
         onClick={handleRedeem}
-        className="w-full mt-6"
         disabled={disableSubmit}
         isLoading={submitting}
       >
-        {submitting ? 'Waiting approval' : 'Redeem PRT'}
+        {submitting ? 'Waiting approval' : 'Redeem SLND'}
       </Button>
     </div>
   )

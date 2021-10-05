@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { cloneElement, ElementType, isValidElement } from 'react'
 
 import { Spinner } from '../spinner'
+import Typography from '../typography/Typography'
 import { ButtonProps, sizes, variants } from './types'
 
 const Button = <E extends ElementType = 'button'>(
@@ -48,14 +49,15 @@ const Button = <E extends ElementType = 'button'>(
             isDisabled,
           'text-disabled': isDisabled,
         },
-        className
+        className,
+        'mainBtn'
       )}
       {...rest}
     >
       <>
         {isLoading && <Spinner className="mr-2" />}
         {isValidElement(startIcon) && cloneElement(startIcon)}
-        {children}
+        <Typography level="titleLabel">{children}</Typography>
         {isValidElement(endIcon) && cloneElement(endIcon)}
       </>
     </button>
