@@ -7,11 +7,19 @@ import PoolCountdown from './PoolCountdown'
 
 interface CardOverlayProps {
   pool: PoolAccount
+  isDeposit: boolean
+  setIsDeposit: (arg: boolean) => void
   title: string
   children: ReactNode
 }
 
-const CardOverlay: React.FC<CardOverlayProps> = ({ children, pool, title }) => {
+const CardOverlay: React.FC<CardOverlayProps> = ({ 
+  children, 
+  pool, 
+  title,
+  isDeposit,
+  setIsDeposit
+}) => {
   const { startIdo, endIdo, startRedeem, endDeposits, poolStatus } =
     usePool(pool)
   const notStarted = startIdo.isAfter()
@@ -23,14 +31,16 @@ const CardOverlay: React.FC<CardOverlayProps> = ({ children, pool, title }) => {
 
   return (
     <CardBase
-      endIdo={endIdo.isBefore()}
+      pool={pool}
+      isDeposit={isDeposit}
+      setIsDeposit={setIsDeposit}
       title={title}
       overlayContent={
         hasOverlay && (
           <div className="absolute z-10 w-full px-8 h-full flex items-center justify-center">
             <div className="bg-white w-full p-6 rounded-sm flex flex-col items-center space-y-3">
-              {notStarted && <h3>Entry Starts</h3>}
-              {notRedeem && <h3>Redeem Starts</h3>}
+              {notStarted && <h3>Entry starts</h3>}
+              {notRedeem && <h3>Redeem starts</h3>}
               <PoolCountdown
                 date={notStarted ? startIdo : startRedeem}
                 poolStatus={poolStatus}

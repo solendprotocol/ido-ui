@@ -3,6 +3,7 @@ import moment from 'moment'
 import Countdown from 'react-countdown'
 
 import { useRefresh } from '../../hooks/useRefresh'
+import Typography from '../typography/Typography'
 
 interface PoolCountdownProps {
   date: moment.Moment
@@ -25,20 +26,26 @@ const PoolCountdown: React.FC<PoolCountdownProps> = ({
       return (
         <div className={classNames(className, 'flex items-center')}>
           <div className="flex flex-col items-center">
-            <span className="bg-black text-white text-center font-bold mx-1 w-8 inline-block py-2 rounded">
-              {hours < 10 ? `0${hours}` : hours}
+            <span className="text-center font-bold mx-1 w-8 inline-block">
+              <Typography>
+                {hours < 10 ? `0${hours}` : hours}
+              </Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">hrs</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="bg-black text-white text-center font-bold mx-1 w-8 inline-block py-2 rounded">
-              {minutes < 10 ? `0${minutes}` : minutes}
+            <span className="text-center font-bold mx-1 w-8 inline-block">
+              <Typography>
+                {minutes < 10 ? `0${minutes}` : minutes}
+              </Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">mins</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="bg-black text-white text-center font-bold mx-1 w-8 inline-block py-2 rounded">
-              {seconds < 10 ? `0${seconds}` : seconds}
+            <span className="text-center font-bold mx-1 w-8 inline-block">
+              <Typography>
+                {seconds < 10 ? `0${seconds}` : seconds}
+              </Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">secs</span>
           </div>

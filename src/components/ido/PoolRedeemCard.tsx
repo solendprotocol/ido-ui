@@ -84,7 +84,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   return (
     <div className="">
       {startRedeem.isAfter() && (
-        <div className="bg-white p-6 text-center mb-4">
+        <div className="bg-white p-5 text-center mb-4">
           <Typography level="titleLabel" color="secondary" className="mb-4">
             Redeem starts
           </Typography>
@@ -95,7 +95,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
           />
         </div>
       )}
-      <div className="bg-white p-6 text-center">
+      <div className="bg-white p-5 text-center">
         <Typography level="titleLabel" color="secondary" className="mb-4">
           Total raised
         </Typography>
@@ -114,7 +114,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
           />
         </div>
       </div>
-      <div className="bg-white p-6 text-center mt-2">
+      <div className="bg-white p-5 text-center mt-2">
         <Typography level="titleLabel" color="secondary" className="mb-4">
           Token price
         </Typography>
@@ -134,7 +134,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
           />
         </div>
       </div>
-      <div className="bg-white p-6 text-center mt-2">
+      <div className="bg-white p-5 text-center mt-2">
         <Typography level="titleLabel" color="secondary" className="mb-4">
           Your contribution
         </Typography>
@@ -153,7 +153,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
           />
         </div>
       </div>
-      <div className="bg-white p-6 text-center mt-2">
+      <div className="bg-white p-5 text-center mt-2">
         <Typography level="titleLabel" color="secondary" className="mb-4">
           Redeemable amount
         </Typography>

@@ -351,3 +351,46 @@ button {
   width: 80%;
   margin: 48 0;
 }
+
+.footer-link {
+  margin: 0 16px;
+}
+
+.welcome-header {
+  text-align: center;
+}
+
+@media (min-width:640px){
+  .welcome-header {
+    width: 700px;
+  }
+
+  .about-container {
+    width: 600px;
+  }
+}
+
+.ant-drawer-body {
+  padding: 0;
+}
+
+.ant-drawer {
+  background-color: var(--color-bg-default);
+}
+
+.ant-drawer-header-no-title {
+  display: none;
+}
+
+.white-button {
+  background-color: var(--color-black);
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-black);
+    opacity: 0.85;
+  }
+  span {
+    color: var(--color-white);
+  }
+}

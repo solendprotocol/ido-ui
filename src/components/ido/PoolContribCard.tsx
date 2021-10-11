@@ -1,4 +1,4 @@
-import { InformationCircleIcon } from '@heroicons/react/outline'
+import { InformationCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -11,13 +11,16 @@ import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
 import { Button } from '../button'
 import { AmountInput } from '../input/AmountInput'
 import { ButtonMenu, ButtonMenuItem } from '../menu'
+import Countdown from './Countdown'
 import StatsCard from './StatsCard'
 
 interface PoolContribCardProps {
-  pool: PoolAccount
+  pool: PoolAccount;
+  isDeposit: boolean;
+  setIsDeposit: (arg: boolean) => void;
 }
 
-const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
+const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool, isDeposit, setIsDeposit }) => {
   const actions = useWalletStore((s) => s.actions)
   const connected = useWalletStore((s) => s.connected)
   const largestAccounts = useLargestAccounts(pool)
@@ -28,7 +31,7 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-  const [isDeposit, setIsDeposit] = useState(true)
+
   const [inputAmount, setInputAmount] = useState('0')
 
   const usdcBalance = largestAccounts.usdc?.balance || 0
@@ -161,32 +164,34 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
 
   return (
     <>
-      <ButtonMenu
-        activeIndex={isDeposit ? 0 : 1}
-        onItemClick={handleChangeMode}
-      >
-        <ButtonMenuItem disabled={!canDeposit}>Deposit</ButtonMenuItem>
-        <ButtonMenuItem>Withdraw</ButtonMenuItem>
-      </ButtonMenu>
       <div className="mt-4" />
-      <AmountInput
-        title={isDeposit ? 'I want to deposit' : 'Withdraw collateral'}
-        placeholder="0"
-        maxValue={totalBalance.toString()}
-        maxIsLoading={connected && loading}
-        maxIsRefreshing={refreshing}
-        maxLabel={isDeposit ? `balance:` : `max withdraw:`}
-        errorMessage={inputError.message}
-        hasError={inputError.hasError}
-        tokenSymbol="USDC"
-        tokenIcon="usdc.svg"
-        value={inputAmount}
-        valueRound="ceil"
-        decimals={6}
-        onRefreshMax={handleRefresh}
-        onChange={handleChangeAmount}
-        disabled={!connected}
+
+      <Countdown
+        endDeposits={endDeposits}
+        endIdo={endIdo}
+        poolStatus={poolStatus}
       />
+      <div style={{
+        margin: '32px 0',
+      }}>
+        <AmountInput
+          title={isDeposit ? 'I want to deposit' : 'Withdraw collateral'}
+          placeholder="0"
+          maxValue={totalBalance.toString()}
+          maxIsLoading={connected && loading}
+          maxIsRefreshing={refreshing}
+          maxLabel={isDeposit ? `balance:` : `max withdraw:`}
+          errorMessage={inputError.message}
+          hasError={inputError.hasError}
+          tokenSymbol="USDC"
+          tokenIcon="usdc.svg"
+          value={inputAmount}
+          valueRound="ceil"
+          decimals={6}
+          onRefreshMax={handleRefresh}
+          onChange={handleChangeAmount}
+          disabled={!connected}
+        />
       <Button
         onClick={handleSubmitContribution}
         className="w-full my-4"
@@ -195,6 +200,7 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
       >
         {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
       </Button>
+      </div>
       {/* Country Not Allowed 🇺🇸😭 */}
       {endDeposits?.isBefore() && endIdo?.isAfter() && (
         <div className="flex items-center space-x-2 mb-4">
