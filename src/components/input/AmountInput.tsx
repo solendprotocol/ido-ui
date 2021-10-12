@@ -8,6 +8,7 @@ import SortDown from '../../../public/icons/sort-down.svg'
 import { TokenIcon } from '../icons'
 import PercentButton from '../percent-button'
 import { Spinner } from '../spinner'
+import Typography from '../typography/Typography'
 
 const toSafeNum = (
   value: string,
@@ -120,7 +121,7 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   return (
     <div className="mb-3">
       <div className="flex flex-row items-center justify-between mb-3">
-        <label className="flex-1 text-sm font-bold">{title}</label>
+        <Typography level="caption" color="secondary">{title}</Typography>
         {!!maxValue && (
           <PercentButton
             disabled={disabled && maxIsLoading}
@@ -201,7 +202,7 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           className="text-xs text-secondary outline-none focus:outline-none"
           onClick={handleSelectMax}
         >
-          {maxLabel} {maxIsLoading ? '' : maxValue}
+          <Typography level="caption" color="secondary">{maxLabel} {maxIsLoading ? '' : maxValue}</Typography>
         </button>
         {maxIsLoading && <Spinner className="mx-1" size="sm" />}
         {onRefreshMax && (

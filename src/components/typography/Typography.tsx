@@ -24,6 +24,8 @@ type TypographyPropsType = {
     | 'secondary'
     | 'brand'
   children?: React.ReactNode
+  onClick?: () => void
+  style: any
 }
 
 Typography.defaultProps = {
@@ -31,6 +33,8 @@ Typography.defaultProps = {
   level: 'body',
   color: 'primary',
   children: null,
+  onClick: undefined,
+  style: undefined,
 }
 
 function Typography({
@@ -38,6 +42,8 @@ function Typography({
   color = 'primary',
   className = '',
   children,
+  onClick,
+  style,
 }: TypographyPropsType): ReactElement {
   const componentMap = {
     display: 'h1',
@@ -58,6 +64,8 @@ function Typography({
     HtmlTag,
     {
       className: classNames(color, level, className),
+      onClick,
+      style,
     },
     children
   )
