@@ -2,32 +2,29 @@ import classNames from 'classnames'
 import moment from 'moment'
 import Countdown from 'react-countdown'
 
+import useDeviceMode from '../../hooks/useDeviceMode'
+import Typography from '../typography/Typography'
+
 interface CountdownBlockProps {
   count: string
   label: string
-  isLast?: boolean
 }
 
 const CountdownBlock: React.FC<CountdownBlockProps> = ({
   count,
   label,
-  isLast,
 }) => {
+  const { isMobile } = useDeviceMode();
   return (
     <>
-      <div className="bg-tertiary flex flex-col items-center w-14 sm:w-100 pt-4 rounded-xl overflow-hidden">
-        <div className="text-brandPrimary text-lg sm:text-xxl text-center font-bold">
+      <div className="bg-scaffold flex flex-col items-center w-14 sm:w-100 pt-4 overflow-hidden">
+        <Typography level={isMobile ? undefined : "display"}>
           {count}
-        </div>
-        <div className="text-xxs sm:text-md text-center bg-white py-2 w-full mt-2 sm:mt-4">
+        </Typography>
+        <Typography level={isMobile ? undefined : "title"}>
           {label}
-        </div>
+        </Typography>
       </div>
-      {!isLast && (
-        <div className="text-brandPrimary text-lg sm:text-xxl px-2 sm:px-4 mb-6 font-bold sm:mb-12">
-          :
-        </div>
-      )}
     </>
   )
 }
@@ -54,22 +51,28 @@ const BigCountdown: React.FC<BigCountdownProps> = ({
             'flex items-center justify-center mt-6 mb-10 sm:mb-16'
           )}
         >
-          <CountdownBlock count={days} label="DAYS" />
-          <CountdownBlock count={hours} label="HOURS" />
-          <CountdownBlock count={minutes} label="MINS" />
-          <CountdownBlock count={seconds} label="SECS" isLast />
+          <CountdownBlock count={days} label="Days" />
+          <CountdownBlock count={hours} label="Hours" />
+          <CountdownBlock count={minutes} label="Mins" />
+          <CountdownBlock count={seconds} label="Secs" />
         </div>
       )
     }
   }
 
+  console.log(date);
+
   if (date) {
+    console.log('yoo', date.format())
     return (
-      <Countdown
-        date={date.format()}
-        renderer={renderCountdown}
-        onComplete={onComplete}
-      />
+      <div className="countdown">
+        <img alt="" src="/images/hero.png" className="countdown-hero" />
+        <Countdown
+          date={date.format()}
+          renderer={renderCountdown}
+          onComplete={onComplete}
+        />
+      </div>
     )
   } else {
     return null

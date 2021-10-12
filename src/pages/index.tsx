@@ -74,7 +74,7 @@ const Main = () => {
       placement='bottom'
     >
         {poolCards}
-        <div className="px-4" style={{
+        <div className="px-4 bg-scaffold" style={{
           marginTop: -16,
         }}>
         {isMobile && <Button
@@ -123,7 +123,7 @@ const Page: React.FC = () => {
         }}
       >
         {!isStarted && (
-          <BigCountdown date={moment()} onComplete={doForceRefresh} />
+          <BigCountdown date={moment().add(1, 'day')} onComplete={doForceRefresh} />
         )}
         {isStarted && <Main />}
       </div>

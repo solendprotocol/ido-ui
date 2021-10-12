@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js'
 import React from 'react'
 
 import NumberText from '../texts/Number'
+import Typography from '../typography/Typography'
 
 interface StatsCardProps {
   estimatedPrice: BigNumber
@@ -17,7 +18,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
   return (
     <div className="flex flex-col space-y-2 gap-1">
       <div className="bg-secondary p-5 text-center">
-        <p className="text-sm text-secondary">USDC Contributed</p>
+        <Typography>USDC Contributed</Typography>
         <div className="flex items-center justify-center pt-2">
           <img
             alt=""
@@ -27,14 +28,14 @@ const StatsCard: React.FC<StatsCardProps> = ({
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="text-mdx"
             value={vaultUsdcBalance}
             defaultIfNull="N/A"
           />
         </div>
       </div>
       <div className="bg-secondary p-5 text-center">
-        <p className="text-sm text-secondary">Estimated Token Price</p>
+        <Typography>Estimated Token Price</Typography>
         <div className="flex items-center justify-center pt-2">
           <img
             alt=""
@@ -44,7 +45,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
             className="mr-2"
           />
           <NumberText
-            className="font-bold text-mdx"
+            className="text-mdx"
             value={estimatedPrice}
             defaultIfNull="N/A"
             displayDecimals={6}
@@ -52,11 +53,11 @@ const StatsCard: React.FC<StatsCardProps> = ({
         </div>
       </div>
       <div className="bg-secondary p-5 text-center">
-        <p className="text-sm text-secondary">SLND For Sale</p>
+        <Typography>SLND For Sale</Typography>
         <div className="flex items-center justify-center pt-2">
           <img className="h-5 mr-2 w-auto" src="/icons/slnd.png" alt="slnd" />
           <NumberText
-            className="font-bold text-mdx"
+            className="text-mdx"
             value={vaultPrtBalance}
             defaultIfNull="N/A"
           />

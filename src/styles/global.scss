@@ -360,16 +360,6 @@ button {
   text-align: center;
 }
 
-@media (min-width:640px){
-  .welcome-header {
-    width: 700px;
-  }
-
-  .about-container {
-    width: 600px;
-  }
-}
-
 .ant-drawer-body {
   padding: 0;
 }
@@ -392,5 +382,33 @@ button {
   }
   span {
     color: var(--color-white);
+  }
+}
+
+.countdown-hero {
+  width: 400px;
+  margin-bottom: 24px;
+}
+
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .countdown-hero {
+    width: unset;
+    margin: 24px;
+  }
+}
+
+@media (min-width:640px) {
+  .welcome-header {
+    width: 700px;
+  }
+
+  .about-container {
+    width: 600px;
   }
 }

@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 import usePool from '../../hooks/usePool'
 import Typography from '../typography/Typography'
 import { PoolAccount } from '../../stores/useWalletStore'
+import useDeviceMode from '../../hooks/useDeviceMode'
 
 interface CardBaseProps {
   pool: PoolAccount
@@ -24,7 +25,7 @@ const CardBase: React.FC<CardBaseProps> = ({
   className,
 }) => {
   const { startIdo, endIdo, endDeposits } = usePool(pool)
-  console.log(endIdo.toLocaleString());
+  const { isMobile } = useDeviceMode();
   const canDeposit =
     startIdo.isBefore() && endIdo.isAfter() && endDeposits.isAfter()
 
@@ -91,7 +92,8 @@ const CardBase: React.FC<CardBaseProps> = ({
   return (
     <div
       className={classNames(
-        'bg-white w-full max-w-card rounded-3xl shadow-card overflow-hidden relative',
+        'bg-scaffold w-full max-w-card overflow-hidden relative',
+        !isMobile && 'shadow-card',
         className
       )}
     >
@@ -102,7 +104,7 @@ const CardBase: React.FC<CardBaseProps> = ({
         })}
       >
         {!!overlayContent && (
-          <div className="absolute rounded-3xl z-10 bg-overlay top-0 bottom-0 left-0 right-0" />
+          <div className="absolute z-10 bg-scaffold top-0 bottom-0 left-0 right-0" />
         )}
          {header}
         <div className="p-4 sm:p-6 break-words">{children}</div>

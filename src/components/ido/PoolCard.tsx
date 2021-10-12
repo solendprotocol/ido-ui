@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import usePool from '../../hooks/usePool'
 import { PoolAccount } from '../../stores/useWalletStore'
@@ -14,7 +14,11 @@ interface PoolCardProps {
 const PoolCard: React.FC<PoolCardProps> = ({ pool, round }) => {
   const { startIdo, endIdo, startRedeem, endDeposits } = usePool(pool)
   const [isDeposit, setIsDeposit] = useState(true)
-  
+
+  useEffect(() => {
+    if(endDeposits.isBefore()) {
+    setIsDeposit(false)
+  }}, [endDeposits]);
 
   return (
     <CardOverlay title={`IDO Round ${round}`} pool={pool}
