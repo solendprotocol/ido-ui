@@ -6,9 +6,9 @@ import { PoolAccount } from '../../stores/useWalletStore'
 import useDeviceMode from '../../hooks/useDeviceMode'
 
 interface CardBaseProps {
-  pool: PoolAccount
-  isDeposit: boolean
-  setIsDeposit: (arg: boolean) => void
+  pool?: PoolAccount
+  isDeposit?: boolean
+  setIsDeposit?: (arg: boolean) => void
   title: string
   titleRight?: ReactNode
   overlayContent?: ReactNode
@@ -26,10 +26,12 @@ const CardBase: React.FC<CardBaseProps> = ({
 }) => {
   const { startIdo, endIdo, endDeposits } = usePool(pool)
   const { isMobile } = useDeviceMode();
-  const canDeposit =
-    startIdo.isBefore() && endIdo.isAfter() && endDeposits.isAfter()
+  let canDeposit;
+  if (pool) {
+    canDeposit = startIdo.isBefore() && endIdo.isAfter() && endDeposits.isAfter()
+  }
 
-  const header = endIdo.isBefore() ? 
+  const header = endIdo && endIdo.isBefore() ? 
   <header className="flex flex-row items-center">
       <Typography
     level="headline"
@@ -106,7 +108,7 @@ const CardBase: React.FC<CardBaseProps> = ({
         {!!overlayContent && (
           <div className="absolute z-10 bg-scaffold top-0 bottom-0 left-0 right-0" />
         )}
-         {header}
+         {pool && header}
         <div className="p-4 sm:p-6 break-words">{children}</div>
       </div>
     </div>

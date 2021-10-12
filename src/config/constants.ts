@@ -48,6 +48,7 @@ export const RPC_ENDPOINTS: WalletEndpoint[] = [
     rpcName: 'RPCPool RPC',
     commitment: 'processed',
   },
+  // TODO: Filter by deployment
   {
     id: 'devnet',
     network: 'devnet' as web3.Cluster,
@@ -94,5 +95,4 @@ export const IDO_ENDPOINTS = [
   },
 ]
 
-// UPDATEMEp
 export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'devnet2')

@@ -214,9 +214,6 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool, isDeposit, setI
         </div>
       )}
       <StatsCard
-        endDeposits={endDeposits}
-        endIdo={endIdo}
-        poolStatus={poolStatus}
         vaultPrtBalance={vaults.prtBalance}
         vaultUsdcBalance={vaults.usdcBalance}
         estimatedPrice={vaults.estimatedPrice}

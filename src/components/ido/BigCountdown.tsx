@@ -60,10 +60,7 @@ const BigCountdown: React.FC<BigCountdownProps> = ({
     }
   }
 
-  console.log(date);
-
   if (date) {
-    console.log('yoo', date.format())
     return (
       <div className="countdown">
         <img alt="" src="/images/hero.png" className="countdown-hero" />

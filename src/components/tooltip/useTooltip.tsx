@@ -193,12 +193,10 @@ const useTooltip = (
     </div>
   )
 
-  // DELETEME
-  const tooltipInPortal = null;
-  // createPortal(
-  //   tooltip,
-  //   document.getElementById('tooltip-portal-root')
-  // )
+  const tooltipInPortal = createPortal(
+    tooltip,
+    document.getElementById('tooltip-portal-root')
+  )
 
   return {
     targetRef: setTargetElement,

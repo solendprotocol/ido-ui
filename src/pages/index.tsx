@@ -90,8 +90,8 @@ const Main = () => {
         setDrawerVisible={setDrawerVisible}
       />
       {!isMobile && poolCards}
-      {/* {!!loadingError && (
-        <CardBase endIdo={false} title="Error" className="md:col-span-2">
+      {!!loadingError && (
+        <CardBase title="Error" className="md:col-span-2">
           <p className="leading-snug mb-6">{loadingError}</p>
           <Button size="sm" onClick={handleReload}>
             Retry to load
@@ -100,10 +100,10 @@ const Main = () => {
       )}
       {loadingIDO &&
         [1].map((key) => (
-          <CardBase endIdo={false} key={key} title="Loading...">
+          <CardBase key={key} title="Loading...">
             <Skeleton count={3} height={90} className="mt-2" />
           </CardBase>
-        ))} */}
+        ))}
     </main>
     </>
   )
@@ -123,7 +123,7 @@ const Page: React.FC = () => {
         }}
       >
         {!isStarted && (
-          <BigCountdown date={moment().add(1, 'day')} onComplete={doForceRefresh} />
+          <BigCountdown date={IDO_STARTS} onComplete={doForceRefresh} />
         )}
         {isStarted && <Main />}
       </div>
