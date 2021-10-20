@@ -10,20 +10,15 @@ interface CountdownBlockProps {
   label: string
 }
 
-const CountdownBlock: React.FC<CountdownBlockProps> = ({
-  count,
-  label,
-}) => {
-  const { isMobile } = useDeviceMode();
+const CountdownBlock: React.FC<CountdownBlockProps> = ({ count, label }) => {
+  const { isMobile } = useDeviceMode()
   return (
     <>
       <div className="bg-scaffold flex flex-col items-center w-14 sm:w-100 pt-4 overflow-hidden">
-        <Typography level={isMobile ? undefined : "display"}>
+        <Typography level={isMobile ? undefined : 'display'}>
           {count}
         </Typography>
-        <Typography level={isMobile ? undefined : "title"}>
-          {label}
-        </Typography>
+        <Typography level={isMobile ? undefined : 'title'}>{label}</Typography>
       </div>
     </>
   )

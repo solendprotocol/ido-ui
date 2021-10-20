@@ -121,7 +121,9 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   return (
     <div className="mb-3">
       <div className="flex flex-row items-center justify-between mb-3">
-        <Typography level="caption" color="secondary">{title}</Typography>
+        <Typography level="caption" color="secondary">
+          {title}
+        </Typography>
         {!!maxValue && (
           <PercentButton
             disabled={disabled && maxIsLoading}
@@ -202,7 +204,9 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           className="text-xs text-secondary outline-none focus:outline-none"
           onClick={handleSelectMax}
         >
-          <Typography level="caption" color="secondary">{maxLabel} {maxIsLoading ? '' : maxValue}</Typography>
+          <Typography level="caption" color="secondary">
+            {maxLabel} {maxIsLoading ? '' : maxValue}
+          </Typography>
         </button>
         {maxIsLoading && <Spinner className="mx-1" size="sm" />}
         {onRefreshMax && (

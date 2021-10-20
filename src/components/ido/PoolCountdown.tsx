@@ -27,25 +27,19 @@ const PoolCountdown: React.FC<PoolCountdownProps> = ({
         <div className={classNames(className, 'flex items-center')}>
           <div className="flex flex-col items-center">
             <span className="text-center font-bold mx-1 w-8 inline-block">
-              <Typography>
-                {hours < 10 ? `0${hours}` : hours}
-              </Typography>
+              <Typography>{hours < 10 ? `0${hours}` : hours}</Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">hrs</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-center font-bold mx-1 w-8 inline-block">
-              <Typography>
-                {minutes < 10 ? `0${minutes}` : minutes}
-              </Typography>
+              <Typography>{minutes < 10 ? `0${minutes}` : minutes}</Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">mins</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-center font-bold mx-1 w-8 inline-block">
-              <Typography>
-                {seconds < 10 ? `0${seconds}` : seconds}
-              </Typography>
+              <Typography>{seconds < 10 ? `0${seconds}` : seconds}</Typography>
             </span>
             <span className="text-xs mt-1 text-secondary">secs</span>
           </div>
