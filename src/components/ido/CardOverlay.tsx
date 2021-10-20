@@ -13,12 +13,12 @@ interface CardOverlayProps {
   children: ReactNode
 }
 
-const CardOverlay: React.FC<CardOverlayProps> = ({ 
-  children, 
-  pool, 
+const CardOverlay: React.FC<CardOverlayProps> = ({
+  children,
+  pool,
   title,
   isDeposit,
-  setIsDeposit
+  setIsDeposit,
 }) => {
   const { startIdo, endIdo, startRedeem, endDeposits, poolStatus } =
     usePool(pool)

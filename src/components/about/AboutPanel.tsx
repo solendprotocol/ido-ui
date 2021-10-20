@@ -1,13 +1,13 @@
 import React from 'react'
-import useDeviceMode from '../../hooks/useDeviceMode';
-import { Button } from '../button';
 
+import useDeviceMode from '../../hooks/useDeviceMode'
+import { Button } from '../button'
 import Typography from '../typography/Typography'
 
 const CardBase: React.FC<{
   setDrawerVisible: (arg: boolean) => void
-}> = ({setDrawerVisible}) => {
-  const { isMobile } = useDeviceMode();
+}> = ({ setDrawerVisible }) => {
+  const { isMobile } = useDeviceMode()
 
   return (
     <div className="flex flex-col items-center gap-8 about-container px-4 sm:px-0">
@@ -29,12 +29,11 @@ const CardBase: React.FC<{
         Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris
         sit amet orci. Aenean dignissim pellentesque felis.
       </Typography>
-      {isMobile && <Button
-        onClick={() => setDrawerVisible(true)}
-        className="w-full"
-      >
-        Participate
-      </Button>}
+      {isMobile && (
+        <Button onClick={() => setDrawerVisible(true)} className="w-full">
+          Participate
+        </Button>
+      )}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js'
 import classNames from 'classnames'
 import { useCallback, useMemo } from 'react'
+
 import Typography from '../typography/Typography'
 
 interface PercentButtonProps {
@@ -46,9 +47,7 @@ const PercentButton: React.FC<PercentButtonProps> = ({
           )}
           onClick={handleChange(per.value)}
         >
-          <Typography color="secondary">
-            {per.label}
-          </Typography>
+          <Typography color="secondary">{per.label}</Typography>
         </button>
       ))}
     </div>

@@ -9,11 +9,7 @@ export const Header: React.FC = () => {
     <header className="flex justify-between border-b px-4 border-default sm:px-48 top-0 w-full z-10 h-16">
       <div className="flex flex-row items-center justify-between h-16 flex-grow">
         <div>
-          <a
-            target='_blank'
-            href='https://solend.fi'
-            rel='noreferrer'
-          >
+          <a target="_blank" href="https://solend.fi" rel="noreferrer">
             <Logo />
           </a>
         </div>

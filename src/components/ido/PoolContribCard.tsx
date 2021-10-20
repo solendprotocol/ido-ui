@@ -1,4 +1,7 @@
-import { InformationCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline'
+import {
+  InformationCircleIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/react/outline'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -15,12 +18,16 @@ import Countdown from './Countdown'
 import StatsCard from './StatsCard'
 
 interface PoolContribCardProps {
-  pool: PoolAccount;
-  isDeposit: boolean;
-  setIsDeposit: (arg: boolean) => void;
+  pool: PoolAccount
+  isDeposit: boolean
+  setIsDeposit: (arg: boolean) => void
 }
 
-const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool, isDeposit, setIsDeposit }) => {
+const PoolContribCard: React.FC<PoolContribCardProps> = ({
+  pool,
+  isDeposit,
+  setIsDeposit,
+}) => {
   const actions = useWalletStore((s) => s.actions)
   const connected = useWalletStore((s) => s.connected)
   const largestAccounts = useLargestAccounts(pool)
@@ -171,9 +178,11 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool, isDeposit, setI
         endIdo={endIdo}
         poolStatus={poolStatus}
       />
-      <div style={{
-        margin: '32px 0',
-      }}>
+      <div
+        style={{
+          margin: '32px 0',
+        }}
+      >
         <AmountInput
           title={isDeposit ? 'I want to deposit' : 'Withdraw collateral'}
           placeholder="0"
@@ -192,14 +201,14 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool, isDeposit, setI
           onChange={handleChangeAmount}
           disabled={!connected}
         />
-      <Button
-        onClick={handleSubmitContribution}
-        className="w-full my-4"
-        disabled={disableSubmit}
-        isLoading={submitting}
-      >
-        {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
-      </Button>
+        <Button
+          onClick={handleSubmitContribution}
+          className="w-full my-4"
+          disabled={disableSubmit}
+          isLoading={submitting}
+        >
+          {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
+        </Button>
       </div>
       {/* Country Not Allowed 🇺🇸😭 */}
       {endDeposits?.isBefore() && endIdo?.isAfter() && (
