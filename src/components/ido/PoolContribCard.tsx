@@ -1,6 +1,4 @@
-import {
-  InformationCircleIcon,
-} from '@heroicons/react/outline'
+import { InformationCircleIcon } from '@heroicons/react/outline'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -178,9 +176,7 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
         endIdo={endIdo}
         poolStatus={poolStatus}
       />
-      <div
-        className="modal"
-      >
+      <div className="modal">
         <AmountInput
           title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
           placeholder="0"

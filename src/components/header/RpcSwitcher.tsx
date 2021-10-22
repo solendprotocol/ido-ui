@@ -70,7 +70,9 @@ export const RpcSwitcher: React.FC = () => {
                 ) : (
                   <div className="border-t border-gray group w-full flex flex-col items-center px-3 py-3">
                     <div className="flex flex-row items-center w-full">
-                      <label className="text-black flex-1 font-bold">Custom RPC</label>
+                      <label className="text-black flex-1 font-bold">
+                        Custom RPC
+                      </label>
                       <button
                         className="text-black text-sm"
                         onClick={handleSelectCustomRpc(item, close)}

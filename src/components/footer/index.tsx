@@ -4,12 +4,15 @@ import Typography from '../typography/Typography'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-scaffold px-6 text-center py-4 border-default border" style={{
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-  }}>
+    <footer
+      className="bg-scaffold px-6 text-center py-4 border-default border"
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
+    >
       <a target="_blank" href="https://solend.fi" rel="noreferrer">
         <Typography level="caption" color="secondary">
           App

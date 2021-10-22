@@ -48,7 +48,7 @@ const ToastItem: React.FC<ToastItemProps> = ({
     }
   }, [timer, duration, handleRemove])
 
-  return null;
+  return null
 }
 
 export default ToastItem

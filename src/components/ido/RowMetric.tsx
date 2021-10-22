@@ -1,17 +1,18 @@
-import React, { ReactElement } from 'react';
-import { Row, Col, Tooltip } from 'antd';
-import Typography from '../typography/Typography';
+import { Col, Row, Tooltip } from 'antd'
+import React, { ReactElement } from 'react'
+
+import Typography from '../typography/Typography'
 
 type RowMetricPropType = {
-  label: React.ReactNode;
-  value: React.ReactNode;
-  tooltip?: React.ReactNode;
-  className?: string;
-};
+  label: React.ReactNode
+  value: React.ReactNode
+  tooltip?: React.ReactNode
+  className?: string
+}
 
 RowMetric.defaultProps = {
   tooltip: null,
-};
+}
 
 function RowMetric({
   label,
@@ -23,14 +24,18 @@ function RowMetric({
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Col span={24} {...props}>
-      <Row justify='space-between'>
+      <Row justify="space-between">
         <Col>
-          <Typography level='caption' color='secondary'>
+          <Typography level="caption" color="secondary">
             {label}
             <span> </span>
             {tooltip && (
               <Tooltip title={tooltip}>
-                <img src='/icons/info.svg' className="inline-block" alt='info' />
+                <img
+                  src="/icons/info.svg"
+                  className="inline-block"
+                  alt="info"
+                />
               </Tooltip>
             )}
           </Typography>
@@ -40,7 +45,7 @@ function RowMetric({
         </Col>
       </Row>
     </Col>
-  );
+  )
 }
 
-export default RowMetric;
+export default RowMetric

@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import BigNumber from 'bignumber.js'
-import ReactMomentCountDown from 'react-moment-countdown';
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import ReactMomentCountDown from 'react-moment-countdown'
 
 import { IDO_RESULTS } from '../../config/constants'
 import useLargestAccounts from '../../hooks/useLargestAccounts'
@@ -10,12 +10,12 @@ import useVaults from '../../hooks/useVaults'
 import { notify } from '../../stores/useNotificationStore'
 import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
 import { calculateSupply } from '../../utils/balance'
-import { formatToken, formatUSD } from '../../utils/numberFormatter';
+import { formatToken, formatUSD } from '../../utils/numberFormatter'
 import { Button } from '../button'
 import NumberText from '../texts/Number'
 import Typography from '../typography/Typography'
 import PoolCountdown from './PoolCountdown'
-import RowMetric from './RowMetric';
+import RowMetric from './RowMetric'
 
 interface PoolRedeemCardProps {
   pool: PoolAccount
@@ -85,13 +85,14 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   const disableSubmit =
     !connected || loading || redeemableSlndAmount <= 0 || startRedeem.isAfter()
 
-  return <Row className="modal relative" justify="center">
-    {startRedeem.isAfter() && <Typography className="redeemCountdown">
-      You can redeem your token in{' '}
-      <ReactMomentCountDown
-        toDate={startRedeem}
-      />
-      </Typography>}
+  return (
+    <Row className="modal relative" justify="center">
+      {startRedeem.isAfter() && (
+        <Typography className="redeemCountdown">
+          You can redeem your token in{' '}
+          <ReactMomentCountDown toDate={startRedeem} />
+        </Typography>
+      )}
       <Col span={24} className="text-center	">
         <Typography level="display">
           {formatToken(redeemableSlndAmount)} SLND
@@ -101,16 +102,17 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         label="Total USDC raised"
         value={formatToken(idoResult?.contributed || usdcBalance, 4, true)}
       />
-      <RowMetric
-        label="Total SLND for sale"
-        value={formatToken(slndBalance)}
-      />
+      <RowMetric label="Total SLND for sale" value={formatToken(slndBalance)} />
       <RowMetric
         label="Token price"
-        value={formatUSD(estimatedPrice && !estimatedPrice.isNaN() ? estimatedPrice.toString() : 0)}
+        value={formatUSD(
+          estimatedPrice && !estimatedPrice.isNaN()
+            ? estimatedPrice.toString()
+            : 0
+        )}
         tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
       />
-      <Col className="m-1"/>
+      <Col className="m-1" />
       <RowMetric
         label="Your USDC contribution"
         value={formatUSD(contributeBalance)}
@@ -134,7 +136,8 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
       <Typography color="secondary" className="modalFooter">
         {formatToken(usdcBalance)} USDC in wallet
       </Typography>
-    </Row>;
+    </Row>
+  )
 }
 
 export default PoolRedeemCard

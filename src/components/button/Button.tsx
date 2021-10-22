@@ -40,8 +40,7 @@ const Button = <E extends ElementType = 'button'>(
           'rounded-xl': size === sizes.MD,
           rounded: size === sizes.XS,
           'rounded-lg': size === sizes.SM,
-          'bg-black hover:bg-blackHover':
-            variant === variants.PRIMARY,
+          'bg-black hover:bg-blackHover': variant === variants.PRIMARY,
           'bg-brandSecondary hover:bg-brandSecondaryHover':
             variant === variants.SECONDARY,
           'bg-failure hover:bg-failureHover': variant === variants.DANGER,
@@ -57,7 +56,9 @@ const Button = <E extends ElementType = 'button'>(
       <>
         {isLoading && <Spinner className="mr-2" />}
         {isValidElement(startIcon) && cloneElement(startIcon)}
-        <Typography level="headline" className="m-0">{children}</Typography>
+        <Typography level="headline" className="m-0">
+          {children}
+        </Typography>
         {isValidElement(endIcon) && cloneElement(endIcon)}
       </>
     </button>

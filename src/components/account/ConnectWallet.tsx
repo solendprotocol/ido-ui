@@ -20,8 +20,8 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
   onNotify({
     type: 'error',
     title: 'fsdafsadf',
-    message: 'fasfsadfsd'
-  });
+    message: 'fasfsadfsd',
+  })
 
   const handleConnect = useCallback(() => {
     if (connected && wallet) {
