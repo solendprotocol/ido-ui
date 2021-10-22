@@ -34,9 +34,9 @@ export default function usePool(pool: PoolAccount) {
     updated,
     pool,
     startIdo,
+    endDeposits,
     endIdo,
     startRedeem,
-    endDeposits,
     poolStatus,
   }
 }

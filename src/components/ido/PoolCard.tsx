@@ -17,7 +17,7 @@ const PoolCard: React.FC<PoolCardProps> = ({ pool, round }) => {
 
   useEffect(() => {
     if (endDeposits.isBefore()) {
-      setIsDeposit(false)
+      setIsDeposit(true)
     }
   }, [endDeposits])
 

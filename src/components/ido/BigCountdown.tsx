@@ -14,11 +14,11 @@ const CountdownBlock: React.FC<CountdownBlockProps> = ({ count, label }) => {
   const { isMobile } = useDeviceMode()
   return (
     <>
-      <div className="bg-scaffold flex flex-col items-center w-14 sm:w-100 pt-4 overflow-hidden">
-        <Typography level={isMobile ? undefined : 'display'}>
+      <div className="flex flex-col items-center w-14 sm:w-100 pt-4 overflow-hidden">
+        <Typography level={isMobile ? undefined : 'display'} className="count">
           {count}
         </Typography>
-        <Typography level={isMobile ? undefined : 'title'}>{label}</Typography>
+        <Typography>{label}</Typography>
       </div>
     </>
   )
@@ -43,13 +43,13 @@ const BigCountdown: React.FC<BigCountdownProps> = ({
         <div
           className={classNames(
             className,
-            'flex items-center justify-center mt-6 mb-10 sm:mb-16'
+            'flex items-center justify-center mb-10 sm:mb-16'
           )}
         >
-          <CountdownBlock count={days} label="Days" />
-          <CountdownBlock count={hours} label="Hours" />
-          <CountdownBlock count={minutes} label="Mins" />
-          <CountdownBlock count={seconds} label="Secs" />
+          <CountdownBlock count={days} label="DAYS" />
+          <CountdownBlock count={hours} label="HOURS" />
+          <CountdownBlock count={minutes} label="MINS" />
+          <CountdownBlock count={seconds} label="SECS" />
         </div>
       )
     }
@@ -57,14 +57,11 @@ const BigCountdown: React.FC<BigCountdownProps> = ({
 
   if (date) {
     return (
-      <div className="countdown">
-        <img alt="" src="/images/hero.png" className="countdown-hero" />
-        <Countdown
-          date={date.format()}
-          renderer={renderCountdown}
-          onComplete={onComplete}
-        />
-      </div>
+      <Countdown
+        date={date.format()}
+        renderer={renderCountdown}
+        onComplete={onComplete}
+      />
     )
   } else {
     return null

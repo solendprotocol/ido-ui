@@ -39,18 +39,18 @@ export default function useVaults(pool: PoolAccount) {
     () => calculateBalance(mints, usdcVault),
     [mints, usdcVault]
   )
-  const prtBalance = useMemo(
+  const slndBalance = useMemo(
     () => calculateBalance(mints, prtVault),
     [mints, prtVault]
   )
 
   const estimatedPrice = useMemo(
     () =>
-      usdcBalance && prtBalance
-        ? new BigNumber(usdcBalance).dividedBy(prtBalance)
+      usdcBalance && slndBalance
+        ? new BigNumber(usdcBalance).dividedBy(slndBalance)
         : undefined,
-    [usdcBalance, prtBalance]
+    [usdcBalance, slndBalance]
   )
 
-  return { usdcBalance, prtBalance, estimatedPrice, fetchVaults }
+  return { usdcBalance, slndBalance, estimatedPrice, fetchVaults }
 }

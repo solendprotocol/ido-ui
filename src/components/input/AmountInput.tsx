@@ -119,8 +119,8 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   )
 
   return (
-    <div className="mb-3">
-      <div className="flex flex-row items-center justify-between mb-3">
+    <div className="mb-1">
+      <div className="flex flex-row items-center justify-between mb-1">
         <Typography level="caption" color="secondary">
           {title}
         </Typography>
@@ -174,18 +174,6 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           disabled={disabled}
         >
           <TokenIcon symbol={tokenSymbol} icon={tokenIcon} size="24" />
-          <div
-            className={classNames('min-w-symbol flex flex-col items-center', {
-              'text-disabled': disabled,
-            })}
-          >
-            <span className="px-1">{tokenSymbol}</span>
-            {tokenNameDetail && (
-              <span className="text-xs text-secondary mt-1">
-                {tokenNameDetail}
-              </span>
-            )}
-          </div>
           {!!onSelectToken && (
             <SortDown
               className={classNames('w-2 ml-2 relative fill-current', {

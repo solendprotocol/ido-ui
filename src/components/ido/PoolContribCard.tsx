@@ -1,7 +1,4 @@
-import {
-  InformationCircleIcon,
-  QuestionMarkCircleIcon,
-} from '@heroicons/react/outline'
+import { InformationCircleIcon } from '@heroicons/react/outline'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -11,9 +8,11 @@ import usePool from '../../hooks/usePool'
 import useVaults from '../../hooks/useVaults'
 import { notify } from '../../stores/useNotificationStore'
 import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
+import { formatToken } from '../../utils/numberFormatter'
 import { Button } from '../button'
 import { AmountInput } from '../input/AmountInput'
 import { ButtonMenu, ButtonMenuItem } from '../menu'
+import Typography from '../typography/Typography'
 import Countdown from './Countdown'
 import StatsCard from './StatsCard'
 
@@ -33,7 +32,6 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
   const largestAccounts = useLargestAccounts(pool)
   const { startIdo, endIdo, endDeposits, poolStatus } = usePool(pool)
   const vaults = useVaults(pool)
-  // const { ipAllowed } = useIpAddress()
 
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -178,18 +176,14 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
         endIdo={endIdo}
         poolStatus={poolStatus}
       />
-      <div
-        style={{
-          margin: '32px 0',
-        }}
-      >
+      <div className="modal">
         <AmountInput
-          title={isDeposit ? 'I want to deposit' : 'Withdraw collateral'}
+          title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
           placeholder="0"
           maxValue={totalBalance.toString()}
           maxIsLoading={connected && loading}
           maxIsRefreshing={refreshing}
-          maxLabel={isDeposit ? `balance:` : `max withdraw:`}
+          maxLabel={isDeposit ? `Balance:` : `Max withdraw:`}
           errorMessage={inputError.message}
           hasError={inputError.hasError}
           tokenSymbol="USDC"
@@ -201,14 +195,23 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
           onChange={handleChangeAmount}
           disabled={!connected}
         />
+        <StatsCard
+          vaultSlndBalance={vaults.slndBalance}
+          vaultUsdcBalance={vaults.usdcBalance}
+          estimatedPrice={vaults.estimatedPrice}
+          userUsdcDeposits={redeemableBalance}
+        />
         <Button
           onClick={handleSubmitContribution}
-          className="w-full my-4"
+          className="w-full"
           disabled={disableSubmit}
           isLoading={submitting}
         >
           {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
         </Button>
+        <Typography color="secondary" className="modalFooter">
+          {formatToken(usdcBalance)} USDC in wallet
+        </Typography>
       </div>
       {/* Country Not Allowed 🇺🇸😭 */}
       {endDeposits?.isBefore() && endIdo?.isAfter() && (
@@ -222,11 +225,6 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
           </div>
         </div>
       )}
-      <StatsCard
-        vaultPrtBalance={vaults.prtBalance}
-        vaultUsdcBalance={vaults.usdcBalance}
-        estimatedPrice={vaults.estimatedPrice}
-      />
     </>
   )
 }

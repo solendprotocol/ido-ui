@@ -59,7 +59,7 @@ export const RpcSwitcher: React.FC = () => {
                   <button
                     onClick={handleSelectEndpoint(item, close)}
                     className={classNames(
-                      'group flex items-center justify-center w-full px-2 py-4 hover:text-brandPrimary',
+                      'text-black group flex items-center justify-center w-full px-2 py-4 hover:text-brandPrimary rpcItem',
                       {
                         'border-t border-gray': index > 0,
                       }
@@ -70,9 +70,11 @@ export const RpcSwitcher: React.FC = () => {
                 ) : (
                   <div className="border-t border-gray group w-full flex flex-col items-center px-3 py-3">
                     <div className="flex flex-row items-center w-full">
-                      <label className="flex-1 font-bold">Custom RPC</label>
+                      <label className="text-black flex-1 font-bold">
+                        Custom RPC
+                      </label>
                       <button
-                        className="text-brandPrimary text-sm"
+                        className="text-black text-sm"
                         onClick={handleSelectCustomRpc(item, close)}
                       >
                         edit
@@ -80,7 +82,7 @@ export const RpcSwitcher: React.FC = () => {
                     </div>
                     <input
                       placeholder="https://api.mainnet-beta.solana.com"
-                      className="bg-input appearance-none pt-2 text-xs focus:outline-none outline-none inline-flex w-full"
+                      className="text-black bg-input appearance-none pt-2 text-xs focus:outline-none outline-none inline-flex w-full"
                       value={customRpcURL}
                       onChange={handleChangeCustomRpc}
                     />
