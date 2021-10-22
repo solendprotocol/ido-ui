@@ -9,7 +9,7 @@ export const VERSION = process.env.NEXT_PUBLIC_VERSION
 /**
  * Used for lending page countdown
  */
-export const IDO_STARTS = moment(process.env.NEXT_PUBLIC_IDO_START)
+export const IDO_STARTS = moment().add(1, 'day')
 
 export const RPC_ENDPOINTS: WalletEndpoint[] = [
   {
@@ -62,6 +62,13 @@ export const RPC_ENDPOINTS: WalletEndpoint[] = [
     rpcURL:
       'https://wispy-white-bird.solana-devnet.quiknode.pro/77f628d0d9a021582e43e00e6b16cbbe19a08bf9/',
     rpcName: 'Solana Devnet',
+    commitment: 'processed' as web3.Commitment,
+  },
+  {
+    id: 'custom',
+    network: 'mainnet-beta' as web3.Cluster,
+    rpcURL: '',
+    rpcName: 'Custom RPC',
     commitment: 'processed' as web3.Commitment,
   },
 ]

@@ -44,7 +44,7 @@ const CardBase: React.FC<CardBaseProps> = ({
             'border-t-2 border-textDefault'
           )}
         >
-          Redeem phase
+          Redeem
         </Typography>
       </header>
     ) : (
@@ -100,7 +100,7 @@ const CardBase: React.FC<CardBaseProps> = ({
   return (
     <div
       className={classNames(
-        'bg-scaffold w-full max-w-card overflow-hidden relative',
+        'bg-scaffold overflow-hidden relative idoActionCard',
         !isMobile && 'shadow-card',
         className
       )}
@@ -115,7 +115,7 @@ const CardBase: React.FC<CardBaseProps> = ({
           <div className="absolute z-10 bg-scaffold top-0 bottom-0 left-0 right-0" />
         )}
         {pool && header}
-        <div className="p-4 sm:p-6 break-words">{children}</div>
+        <div className="px-4 sm:px-6 break-words">{children}</div>
       </div>
     </div>
   )

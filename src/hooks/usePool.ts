@@ -34,9 +34,9 @@ export default function usePool(pool: PoolAccount) {
     updated,
     pool,
     startIdo,
-    endIdo,
-    startRedeem,
-    endDeposits,
+    endDeposits: moment().add(1, 'day'),
+    endIdo: moment().add(1, 'day'),
+    startRedeem: moment().add(-1, 'day'),
     poolStatus,
   }
 }

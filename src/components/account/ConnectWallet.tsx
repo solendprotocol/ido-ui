@@ -13,9 +13,15 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
   className,
   onShowWallets,
 }) => {
-  const { wallet, connected, deactivate } = useWallet()
+  const { wallet, connected, deactivate, onNotify } = useWallet()
 
   const [onPresentConnectWallet] = useModal(<WalletModal />)
+
+  onNotify({
+    type: 'error',
+    title: 'fsdafsadf',
+    message: 'fasfsadfsd'
+  });
 
   const handleConnect = useCallback(() => {
     if (connected && wallet) {

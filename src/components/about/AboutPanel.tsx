@@ -10,24 +10,25 @@ const CardBase: React.FC<{
   const { isMobile } = useDeviceMode()
 
   return (
-    <div className="flex flex-col items-center gap-8 about-container px-4 sm:px-0">
-      <div>
+    <div 
+      style={{              
+        background: `url(/images/bg/market_hero.dark.svg)`
+      }}
+    >
         <Typography level="display" className="welcome-header">
           Welcome to the Solend IDO
         </Typography>
-      </div>
       <img alt="" src="/images/hero.png" className="hero" />
       <Typography color="secondary" className="px-4 sm:px-0">
-        <Typography>What is this?</Typography>
+        <Typography>How it works</Typography>
         <br />
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-        Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        Earn interest on deposits and borrow assets on the fastest, lowest fee, and most scalable lending deposits and borrow assets on the fastest, lowest fee, and most scalable lending protocol.
         <br />
-        <br />
-        <Typography>Is this that thing that is that?</Typography>
-        <br />
-        Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris
-        sit amet orci. Aenean dignissim pellentesque felis.
+        <br />    
+        <Typography>Oct 24 12:00pm UTC</Typography>  Deposit and withdrawal (sale period)
+        <Typography>Oct 25 12:00pm UTC</Typography>  Withdrawal only (grace period)
+        <Typography>Oct 26 12:00pm UTC</Typography>  Withdrawal closed
+        <Typography>Oct 27 12:00pm UTC</Typography>  Tokens airdropped
       </Typography>
       {isMobile && (
         <Button onClick={() => setDrawerVisible(true)} className="w-full">
