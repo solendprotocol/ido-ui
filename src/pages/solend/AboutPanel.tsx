@@ -1,24 +1,43 @@
 import { Col, Row } from 'antd'
 import React from 'react'
-
 import { Button } from '../../components/button'
+
+import BigCountdown from '../../components/ido/BigCountdown'
 import Typography from '../../components/typography/Typography'
+import { IDO_STARTS } from '../../config/constants'
 import useDeviceMode from '../../hooks/useDeviceMode'
+import usePool from '../../hooks/usePool'
+import { useRefresh } from '../../hooks/useRefresh'
+import useWalletStore from '../../stores/useWalletStore'
 
 const CardBase: React.FC<{
   setDrawerVisible: (arg: boolean) => void
 }> = ({ setDrawerVisible }) => {
+  const pool = useWalletStore((s) => s.pools)[0]
+  const { startIdo, endDeposits, endIdo, startRedeem } = usePool(pool)
   const { isMobile } = useDeviceMode()
+  const { doForceRefresh } = useRefresh()
 
   return (
-    <Row gutter={[0, 24]} className="side">
+    <Row gutter={[0, 24]} justify={isMobile ? "center" : undefined} className="side">
       <Col>
         <Typography level="display" className="welcome">
-          Welcome to the
+          Welcome {isMobile && <br />}to the
           <br />
-          Solend IDO
+          Solend <Typography level="display" color="brand" className="inline-block idoText">IDO</Typography>
         </Typography>
       </Col>
+      {isMobile && (IDO_STARTS.isAfter() || startIdo?.isAfter() ?  <Col className="w-full text-center">
+        <Typography>Begins in:</Typography>
+        <BigCountdown
+          date={startIdo}
+          onComplete={doForceRefresh}
+        />
+      </Col> : <Col span={24}>
+        <Button onClick={() => setDrawerVisible(true)} className="w-full participate primaryBtnColors">
+            Participate
+        </Button>
+      </Col>)}
       <Col className="card">
         <Typography level="headline">How it works</Typography>
         <br />
@@ -36,21 +55,29 @@ const CardBase: React.FC<{
       </Col>
       <Col className="card">
         <Typography level="headline">Timeline</Typography>
-        <Typography className="date">Oct 26 12:00pm UTC</Typography>{' '}
-        <Typography color="secondary">Withdrawal closed</Typography>
-        <br />
-        <Typography className="date">Oct 24 12:00pm UTC</Typography>{' '}
+        <Typography className="date">{startIdo?.utc()?.format("MMM DD HH:mma")} UTC</Typography>{' '}
+        {isMobile && <br/>}
         <Typography color="secondary">
-          Deposit and withdrawal (sale period)
+          Sale period (deposit and withdrawals)
         </Typography>
         <br />
-        <Typography className="date">Oct 25 12:00pm UTC</Typography>{' '}
+        <Typography className="date">{endDeposits?.utc()?.format("MMM DD HH:mma")} UTC</Typography>{' '}
+        {isMobile && <br/>}
         <Typography color="secondary">
-          Withdrawal only (grace period)
+          Grace period (withdrawal only)
         </Typography>
         <br />
-        <Typography className="date">Oct 27 12:00pm UTC</Typography>{' '}
-        <Typography color="secondary">Tokens airdropped</Typography>
+        <Typography className="date">{endIdo?.utc()?.format("MMM DD HH:mma")} UTC</Typography>{' '}
+        {isMobile && <br/>}
+        <Typography color="secondary">
+          IDO ends
+        </Typography>
+        <br />
+        <Typography className="date">{startRedeem?.utc()?.format("MMM DD HH:mma")} UTC</Typography>{' '}
+        {isMobile && <br/>}
+        <Typography color="secondary">Tokens redeemable</Typography>
+      </Col>
+      <Col>
       </Col>
       <Col>
         <Typography level="headline">
@@ -58,13 +85,6 @@ const CardBase: React.FC<{
             <u>Learn more</u>
           </a>
         </Typography>
-      </Col>
-      <Col>
-        {isMobile && (
-          <Button onClick={() => setDrawerVisible(true)} className="w-full">
-            Participate
-          </Button>
-        )}
       </Col>
     </Row>
   )

@@ -47,7 +47,7 @@ const PercentButton: React.FC<PercentButtonProps> = ({
           )}
           onClick={handleChange(per.value)}
         >
-          <Typography color="secondary">{per.label}</Typography>
+          <Typography level="caption" color="secondary">{per.label}</Typography>
         </button>
       ))}
     </div>

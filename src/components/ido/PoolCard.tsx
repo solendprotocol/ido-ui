@@ -9,15 +9,16 @@ import PoolRedeemCard from './PoolRedeemCard'
 interface PoolCardProps {
   pool: PoolAccount
   round?: string
+  setDrawerVisible: (arg: boolean) => void
 }
 
-const PoolCard: React.FC<PoolCardProps> = ({ pool, round }) => {
+const PoolCard: React.FC<PoolCardProps> = ({ pool, round, setDrawerVisible }) => {
   const { startIdo, endIdo, startRedeem, endDeposits } = usePool(pool)
   const [isDeposit, setIsDeposit] = useState(true)
 
   useEffect(() => {
     if (endDeposits.isBefore()) {
-      setIsDeposit(true)
+      setIsDeposit(false)
     }
   }, [endDeposits])
 
@@ -33,6 +34,7 @@ const PoolCard: React.FC<PoolCardProps> = ({ pool, round }) => {
           isDeposit={isDeposit}
           setIsDeposit={setIsDeposit}
           pool={pool}
+          setDrawerVisible={setDrawerVisible}
         />
       )}
       {endIdo.isBefore() && <PoolRedeemCard pool={pool} />}
