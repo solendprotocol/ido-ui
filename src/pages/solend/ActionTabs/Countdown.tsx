@@ -19,7 +19,10 @@ const Countdown: React.FC = () => {
         <img src="/images/about_hero.png" width={360} />
       </Col>
       <Col>
-        <BigCountdown date={startIdo ?? IDO_STARTS} onComplete={doForceRefresh} />
+        <BigCountdown
+          date={startIdo ?? IDO_STARTS}
+          onComplete={doForceRefresh}
+        />
       </Col>
     </Row>
   )
