@@ -9,7 +9,7 @@ export const VERSION = process.env.NEXT_PUBLIC_VERSION
 /**
  * Used for lending page countdown
  */
-export const IDO_STARTS = moment('2021-11-01')
+export const IDO_STARTS = moment.utc('2021-10-24T14:50:00Z')
 
 export const RPC_ENDPOINTS: WalletEndpoint[] = [
   {
