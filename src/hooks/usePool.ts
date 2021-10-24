@@ -27,6 +27,7 @@ export default function usePool(pool: PoolAccount) {
       ? 'Deposits are closed'
       : endIdo?.isBefore()
       ? 'The IDO has ended'
+
       : 'The IDO is starting...'
 
   // DELETEME

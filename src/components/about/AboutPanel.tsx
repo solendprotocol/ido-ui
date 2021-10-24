@@ -16,7 +16,7 @@ const CardBase: React.FC<{
       }}
     >
       <Typography level="display" className="welcome-header">
-        Welcome to the Solend IDO
+        Welcome to the Solend <Typography level="display" color="brand">IDO</Typography>
       </Typography>
       <img alt="" src="/images/hero.png" className="hero" />
       <Typography color="secondary" className="px-4 sm:px-0">

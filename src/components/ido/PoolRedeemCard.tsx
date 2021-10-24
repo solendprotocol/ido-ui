@@ -9,9 +9,10 @@ import usePool from '../../hooks/usePool'
 import useVaults from '../../hooks/useVaults'
 import { notify } from '../../stores/useNotificationStore'
 import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
-import { calculateSupply } from '../../utils/balance'
+import { calculateBalance, calculateSupply } from '../../utils/balance'
 import { formatToken, formatUSD } from '../../utils/numberFormatter'
 import { Button } from '../button'
+import { TokenIcon } from '../icons'
 import NumberText from '../texts/Number'
 import Typography from '../typography/Typography'
 import PoolCountdown from './PoolCountdown'
@@ -26,12 +27,13 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   const connected = useWalletStore((s) => s.connected)
   const mints = useWalletStore((s) => s.mints)
   const largestAccounts = useLargestAccounts(pool)
-  const { slndBalance, usdcBalance, fetchVaults } = useVaults(pool)
+  const { slndBalance, usdcBalance: vaultUsdcBalance, fetchVaults } = useVaults(pool)
   const { startRedeem } = usePool(pool)
   const [submitting, setSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const contributeBalance = largestAccounts.redeemable?.balance || 0
+  const userUsdcAmount = largestAccounts.usdc?.balance || 0
 
   const redeemableSlndAmount = useMemo(() => {
     const redeemableSupply = calculateSupply(mints, pool.redeemableMint)
@@ -79,7 +81,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
 
   const idoResult = IDO_RESULTS[pool.publicKey.toBase58()]
   const estimatedPrice = new BigNumber(
-    idoResult?.contributed || usdcBalance
+    idoResult?.contributed || vaultUsdcBalance
   ).dividedBy(idoResult?.allocation || slndBalance)
 
   const disableSubmit =
@@ -94,35 +96,33 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         </Typography>
       )}
       <Col span={24} className="text-center	">
-        <Typography level="display">
+        <Typography level="display" style={{
+          fontSize: 36,
+        }}>
           {formatToken(redeemableSlndAmount)} SLND
         </Typography>
       </Col>
       <RowMetric
         label="Total USDC raised"
-        value={formatToken(idoResult?.contributed || usdcBalance, 4, true)}
+        value={<>{formatToken(idoResult?.contributed || vaultUsdcBalance, 4, true)} <TokenIcon className="inline-block" symbol="USDC" icon="usdc.svg" size="16" /></>}
       />
-      <RowMetric label="Total SLND for sale" value={formatToken(slndBalance)} />
+      <RowMetric label="Total SLND for sale" value={<>{formatToken(slndBalance)}  <TokenIcon className="inline-block" symbol="SLND" icon="slnd.png" size="16" /></>} />
       <RowMetric
-        label="Token price"
-        value={formatUSD(
-          estimatedPrice && !estimatedPrice.isNaN()
-            ? estimatedPrice.toString()
-            : 0
-        )}
+        label="Implied token price"
+        value={<>{estimatedPrice && !estimatedPrice.isNaN() ? 
+          <>${formatToken(estimatedPrice.toString(), 4, true)}</> 
+          : '-'}</>}
         tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
       />
       <Col className="m-1" />
       <RowMetric
         label="Your USDC contribution"
-        value={formatUSD(contributeBalance)}
-        tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
+        value={formatToken(contributeBalance, 4, true)}
         className="card"
       />
       <RowMetric
         label="Redeemable SLND"
-        value={formatUSD(redeemableSlndAmount)}
-        tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
+        value={formatToken(redeemableSlndAmount, 4, true)}
         className="card"
       />
       <Button
@@ -134,7 +134,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         {submitting ? 'Waiting approval' : 'Redeem SLND'}
       </Button>
       <Typography color="secondary" className="modalFooter">
-        {formatToken(usdcBalance)} USDC in wallet
+        {formatToken(userUsdcAmount)} USDC in wallet
       </Typography>
     </Row>
   )

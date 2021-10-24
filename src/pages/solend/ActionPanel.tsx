@@ -10,56 +10,23 @@ import useWalletStore from '../../stores/useWalletStore'
 import Countdown from './ActionTabs/Countdown'
 
 const Main: React.FC<{
-  drawerVisible: boolean
   setDrawerVisible: (arg: boolean) => void
-}> = ({ drawerVisible, setDrawerVisible }) => {
+}> = ({ setDrawerVisible }) => {
   const pool = useWalletStore((s) => s.pools)[0]
   const { startIdo } = usePool(pool)
-  const { isMobile } = useDeviceMode()
 
-  console.log(IDO_STARTS, IDO_STARTS.isBefore())
-
-  if (!startIdo || startIdo?.isAfter()) {
+  if (IDO_STARTS.isAfter() || !startIdo || startIdo?.isAfter()) {
     return <Countdown />
   }
 
   const poolCard = pool ? (
-    <PoolCard key={pool.publicKey.toBase58()} pool={pool} round={'1'} />
+    <PoolCard key={pool.publicKey.toBase58()} pool={pool} round={'1'} setDrawerVisible={setDrawerVisible} />
   ) : null
 
   return (
     <>
-      {isMobile && (
-        <Drawer
-          closable
-          onClose={() => setDrawerVisible(false)}
-          visible={drawerVisible}
-          destroyOnClose
-          footer={null}
-          getContainer={false}
-          style={{
-            position: 'fixed',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: drawerVisible ? 11 : -1,
-          }}
-          placement="bottom"
-        >
-          {poolCard}
-          {isMobile && (
-            <Button
-              onClick={() => setDrawerVisible(false)}
-              className="w-full white-button"
-            >
-              Back
-            </Button>
-          )}
-        </Drawer>
-      )}
       <Row justify="center" align="middle" className="actionCardHolder">
-        <Col>{!isMobile && poolCard}</Col>
+        <Col>{poolCard}</Col>
       </Row>
     </>
   )

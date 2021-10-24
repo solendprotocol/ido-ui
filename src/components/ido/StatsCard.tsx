@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js'
 import React from 'react'
 
 import { formatToken, formatUSD } from '../../utils/numberFormatter'
+import { TokenIcon } from '../icons'
 import NumberText from '../texts/Number'
 import Typography from '../typography/Typography'
 import RowMetric from './RowMetric'
@@ -27,16 +28,16 @@ const StatsCard: React.FC<StatsCardProps> = ({
         value={formatToken(vaultUsdcBalance, 4, true)}
       />
       <RowMetric
-        label="Estimated token price"
-        value={
-          estimatedPrice && !estimatedPrice.isNaN()
-            ? formatUSD(estimatedPrice.toString())
-            : '-'
-        }
+        label="Total SLND for sale"
+        value={<>{formatToken(vaultSlndBalance, 4, true)}</>}
       />
       <RowMetric
-        label="Total SLND for sale"
-        value={<>{formatToken(vaultSlndBalance, 4, true)}/SLND</>}
+        label="Implied token price"
+        value={<>
+          {estimatedPrice && !estimatedPrice.isNaN()
+            ? <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+            : '-'}</>
+        }
       />
       <Col className="m-1" />
       <RowMetric
@@ -45,13 +46,12 @@ const StatsCard: React.FC<StatsCardProps> = ({
         className="card"
       />
       <RowMetric
-        label="Your current SLND allocation"
+        label="Your SLND allocation"
         value={
           estimatedPrice && !estimatedPrice.isNaN()
             ? formatToken(
                 new BigNumber(vaultSlndBalance)
-                  .div(estimatedPrice)
-                  .multipliedBy(userUsdcDeposits)
+                  .multipliedBy(new BigNumber(userUsdcDeposits).div(vaultUsdcBalance))
                   .toString()
               )
             : '-'

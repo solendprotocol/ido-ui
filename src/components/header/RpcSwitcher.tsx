@@ -38,7 +38,7 @@ export const RpcSwitcher: React.FC = () => {
 
   return (
     <Popover className="relative hidden sm:block">
-      <Popover.Button className="h-10 px-4 text-sm focus:outline-none flex flex-row items-center justify-center space-x-2 headerBtn primaryBtnColors">
+      <Popover.Button className="h-10 px-4 text-sm focus:outline-none flex flex-row items-center justify-center space-x-2 headerBtn rpcBtnColors">
         {endpoint?.rpcName}
         <ChevronDownIcon className="w-5 h-5" aria-hidden="true" />
       </Popover.Button>

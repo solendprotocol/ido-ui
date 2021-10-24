@@ -5,6 +5,7 @@ import React, { useCallback } from 'react'
 import NumberFormat, { NumberFormatValues } from 'react-number-format'
 
 import SortDown from '../../../public/icons/sort-down.svg'
+import { formatToken } from '../../utils/numberFormatter'
 import { TokenIcon } from '../icons'
 import PercentButton from '../percent-button'
 import { Spinner } from '../spinner'
@@ -119,7 +120,7 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   )
 
   return (
-    <div className="mb-1">
+    <div className={classNames("mb-1", className)}>
       <div className="flex flex-row items-center justify-between mb-1">
         <Typography level="caption" color="secondary">
           {title}
@@ -193,14 +194,14 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           onClick={handleSelectMax}
         >
           <Typography level="caption" color="secondary">
-            {maxLabel} {maxIsLoading ? '' : maxValue}
+            {maxLabel} {maxIsLoading ? '' : formatToken(maxValue)}
           </Typography>
         </button>
         {maxIsLoading && <Spinner className="mx-1" size="sm" />}
         {onRefreshMax && (
           <button disabled={maxIsRefreshing} onClick={onRefreshMax}>
             <RefreshIcon
-              className={classNames('w-3 h-3 ml-1', {
+              className={classNames('w-3 h-3 ml-1 spin', {
                 'animate-spin': maxIsRefreshing,
               })}
             />

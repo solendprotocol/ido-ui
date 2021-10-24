@@ -1,6 +1,9 @@
 import { InformationCircleIcon } from '@heroicons/react/outline'
+import { Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
+import ReactMomentCountDown from 'react-moment-countdown'
+import useDeviceMode from '../../hooks/useDeviceMode'
 
 // import useIpAddress from '../../hooks/useIpAddress's
 import useLargestAccounts from '../../hooks/useLargestAccounts'
@@ -20,13 +23,16 @@ interface PoolContribCardProps {
   pool: PoolAccount
   isDeposit: boolean
   setIsDeposit: (arg: boolean) => void
+  setDrawerVisible: (arg: boolean) => void
 }
 
 const PoolContribCard: React.FC<PoolContribCardProps> = ({
   pool,
   isDeposit,
   setIsDeposit,
+  setDrawerVisible,
 }) => {
+  const { isMobile } = useDeviceMode();
   const actions = useWalletStore((s) => s.actions)
   const connected = useWalletStore((s) => s.connected)
   const largestAccounts = useLargestAccounts(pool)
@@ -168,16 +174,16 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
     (isDeposit ? !canDeposit : !canWithdraw)
 
   return (
-    <>
-      <div className="mt-4" />
-
-      <Countdown
-        endDeposits={endDeposits}
-        endIdo={endIdo}
-        poolStatus={poolStatus}
-      />
-      <div className="modal">
+    <Row justify="center" className="modal">
+      {canDeposit ? <Typography className="contributeCountdown">
+          Sale period ends in {' '}
+        <ReactMomentCountDown toDate={endDeposits} />
+      </Typography> : <Typography className="contributeCountdown">
+          Grace period ends in {' '}
+        <ReactMomentCountDown toDate={endIdo} />
+      </Typography>}
         <AmountInput
+          className="w-full mt-1"
           title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
           placeholder="0"
           maxValue={totalBalance.toString()}
@@ -209,23 +215,16 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
         >
           {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
         </Button>
+        {isMobile && <Button
+          onClick={() => setDrawerVisible(false)}
+          className="w-full rpcBtnColors"
+        >
+          Back
+        </Button>}
         <Typography color="secondary" className="modalFooter">
           {formatToken(usdcBalance)} USDC in wallet
         </Typography>
-      </div>
-      {/* Country Not Allowed 🇺🇸😭 */}
-      {endDeposits?.isBefore() && endIdo?.isAfter() && (
-        <div className="flex items-center space-x-2 mb-4">
-          <InformationCircleIcon className="h-5 w-5 text-secondary" />
-          <div className="text-xxs sm:text-xs">
-            <p className="mb-1">
-              You can only withdraw your contribution during the grace period.
-            </p>
-            <p>Any withdrawals cannot be reversed.</p>
-          </div>
-        </div>
-      )}
-    </>
+    </Row>
   )
 }
 

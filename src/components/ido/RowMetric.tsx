@@ -23,7 +23,7 @@ function RowMetric({
 }: RowMetricPropType): ReactElement {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col span={24} {...props}>
+    <Col span={24} className={className} {...props}>
       <Row justify="space-between">
         <Col>
           <Typography level="caption" color="secondary">

@@ -55,12 +55,13 @@ const CardBase: React.FC<CardBaseProps> = ({
           className={classNames(
             'flex-1 text-center p-4',
             !isDeposit ? 'bg-default' : 'border-t-2 border-textDefault',
-            !canDeposit && 'cursor-not-allowed'
+            !canDeposit ? 'cursor-not-allowed' : 'pointer'
           )}
-          style={{
-            cursor: 'pointer',
+          onClick={() => {
+            if (canDeposit) {
+              setIsDeposit(true);
+            }
           }}
-          onClick={() => setIsDeposit(true)}
         >
           <>
             {!canDeposit && (
@@ -77,7 +78,7 @@ const CardBase: React.FC<CardBaseProps> = ({
                 />{' '}
               </>
             )}
-            Deposit phase
+            Deposit
           </>
         </Typography>
         <Typography
@@ -92,7 +93,7 @@ const CardBase: React.FC<CardBaseProps> = ({
           }}
           onClick={() => setIsDeposit(false)}
         >
-          Withdraw phase
+          Withdraw
         </Typography>
       </header>
     )
@@ -100,8 +101,9 @@ const CardBase: React.FC<CardBaseProps> = ({
   return (
     <div
       className={classNames(
-        'bg-scaffold overflow-hidden relative idoActionCard',
+        'bg-scaffold overflow-hidden relative',
         !isMobile && 'shadow-card',
+        isMobile ? 'mobileIdoActionCard' : 'idoActionCard',
         className
       )}
     >

@@ -281,11 +281,11 @@ button {
 }
 
 .brandAlt {
-  color: var(--color-brand-primary);
+  color: var(--color-brand-secondary);
 }
 
 .brand {
-  color: var(--color-brand-secondary);
+  color: var(--color-brand-primary);
 }
 
 .number {
@@ -332,11 +332,25 @@ button {
 }
 
 .primaryBtnColors {
-  background-color: var(--color-bg-default);
-  color: var(--color-text-default);
+  background-color: var(--color-brand-primary);
+  color: var(--color-black);
 
-  div {
-    color: var(--color-text-default);
+  h3 {
+    color: var(--color-black);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-brand-primary);
+  }
+}
+
+.rpcBtnColors {
+  background-color: var(--color-bg-default);
+  color: var(--color-black);
+
+  h3 {
+    color: var(--color-black);
   }
 
   &:hover,
@@ -418,6 +432,9 @@ button {
 
 .side {
   padding: 96px;
+  @media (max-width: 640px) {
+    padding: 32px;
+  }
 }
 
 .holder {
@@ -499,4 +516,66 @@ a {
 
 .redeemCountdown {
   margin-top: -24px;
+}
+
+.contributeCountdown {
+  margin-top: -16px;
+  margin-bottom: 4px;
+}
+
+.spin {
+  path {
+    stroke: var(--color-text-secondary)
+  }
+}
+
+.header {
+  @media (min-width: 640px) {
+    padding: 0 150px !important;
+  }
+}
+
+.wrapper {
+  padding: 0 150px;
+  @media (max-width: 640px) {
+    padding: 0 16px;
+    padding-bottom: 48px;
+  }
+}
+
+.customFooter {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: unset !important;
+  margin-right: unset !important;
+  @media (min-width: 640px) {
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-left: unset !important;
+    margin-right: unset !important;
+  }
+}
+
+#__next {
+  position: relative;
+}
+
+.participate {
+  margin-top: -12px;
+  margin-bottom: 12px;
+}
+
+.mobileIdoActionCard {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.idoText {
+  background: -webkit-linear-gradient(#FF5C28, #FF8F28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
