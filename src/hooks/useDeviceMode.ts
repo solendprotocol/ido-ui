@@ -65,7 +65,7 @@ export default function useViewMode(): ViewModeContextType {
     },
   ]
 
-  console.log(useMediaQuery({ query: responsiveMap.xl }), responsiveMap.xl);
+  console.log(useMediaQuery({ query: responsiveMap.xl }), responsiveMap.xl)
 
   /* eslint-disable */
   const fromPairs = (arr: any) =>
