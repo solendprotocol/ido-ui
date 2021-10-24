@@ -65,6 +65,8 @@ export default function useViewMode(): ViewModeContextType {
     },
   ]
 
+  console.log(useMediaQuery({ query: responsiveMap.xl }), responsiveMap.xl);
+
   /* eslint-disable */
   const fromPairs = (arr: any) =>
     arr.reduce((acc: any, val: any) => ((acc[val[0]] = val[1]), acc), {})

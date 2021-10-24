@@ -20,7 +20,7 @@ const Countdown: React.FC = () => {
       </Col>
       <Col>
         <BigCountdown
-          date={startIdo ?? IDO_STARTS}
+          date={IDO_STARTS ?? startIdo}
           onComplete={doForceRefresh}
         />
       </Col>

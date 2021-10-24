@@ -9,7 +9,7 @@ export const VERSION = process.env.NEXT_PUBLIC_VERSION
 /**
  * Used for lending page countdown
  */
-export const IDO_STARTS = moment.utc('2021-10-24T14:50:00Z')
+export const IDO_STARTS = moment.utc(1635087600000)
 
 export const RPC_ENDPOINTS: WalletEndpoint[] = [
   {
@@ -98,7 +98,7 @@ export const IDO_ENDPOINTS = [
     network: 'devnet' as web3.Cluster,
     programId: '8SBvVZtJbHPQVhbsmQz8c4Msyj2i1WYrigMEi2BY2YHH',
     usdcMint: 'BoKaqcjcRgbaciV33odD1rMrtz29wh5HFFVmSFBMTZhQ',
-    pools: ['DNYoGszDLvVpz2hQB6Z9RMWpXynBWGuWn4JGdLoDgY85'],
+    pools: ['F2TkNeTKE1BdEaXo54E5rJxHx7bbpUBiUFNLH2WtwN1N'],
   },
 ]
 

@@ -24,7 +24,7 @@ const Page: React.FC = () => {
         {drawerVisible && isMobile && (
           <ActionPanel setDrawerVisible={setDrawerVisible} />
         )}
-        <Row justify={xl ? 'space-between' : 'center'}>
+        <Row justify={!xl ? 'center' : 'space-between'}>
           <Col xs={24} xl={12}>
             <AboutPanel setDrawerVisible={setDrawerVisible} />
           </Col>
@@ -32,12 +32,9 @@ const Page: React.FC = () => {
             <Col
               xs={24}
               xl={12}
+              className="blurBg"
               style={{
-                background: xl
-                  ? `url(/images/bg/market_hero.dark.svg)`
-                  : undefined,
-                marginBottom: -16,
-                paddingBottom: xl ? 16 : 120,
+                background: `url(/images/bg/market_hero.dark.svg)`,
               }}
             >
               <ActionPanel setDrawerVisible={setDrawerVisible} />

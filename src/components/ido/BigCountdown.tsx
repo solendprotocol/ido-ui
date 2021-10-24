@@ -36,23 +36,19 @@ const BigCountdown: React.FC<BigCountdownProps> = ({
   onComplete,
 }) => {
   const renderCountdown = ({ days, hours, minutes, seconds, completed }) => {
-    if (completed) {
-      return <div />
-    } else {
-      return (
-        <div
-          className={classNames(
-            className,
-            'flex items-center justify-center mb-10 sm:mb-16'
-          )}
-        >
-          <CountdownBlock count={days} label="DAYS" />
-          <CountdownBlock count={hours} label="HOURS" />
-          <CountdownBlock count={minutes} label="MINS" />
-          <CountdownBlock count={seconds} label="SECS" />
-        </div>
-      )
-    }
+    return (
+      <div
+        className={classNames(
+          className,
+          'flex items-center justify-center mb-10 sm:mb-16'
+        )}
+      >
+        <CountdownBlock count={days} label="DAYS" />
+        <CountdownBlock count={hours} label="HOURS" />
+        <CountdownBlock count={minutes} label="MINS" />
+        <CountdownBlock count={seconds} label="SECS" />
+      </div>
+    )
   }
 
   if (date) {
