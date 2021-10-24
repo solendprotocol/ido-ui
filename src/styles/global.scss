@@ -537,6 +537,9 @@ a {
 
 .wrapper {
   padding: 0 150px;
+  @media (max-width: 1200px) {
+    padding: 0 16px;
+  }
   @media (max-width: 640px) {
     padding: 0 16px;
     padding-bottom: 48px;

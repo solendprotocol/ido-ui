@@ -127,7 +127,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         label="Total SLND for sale"
         value={
           <>
-            {formatToken(slndBalance)}{' '}
+            {formatToken(idoResult?.allocation || slndBalance)}{' '}
             <TokenIcon
               className="inline-block"
               symbol="SLND"
@@ -151,7 +151,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
       />
       <Col className="m-1" />
-      {contributeBalance && (
+      {contributeBalance && contributeBalance > 0 && (
         <RowMetric
           label="Your USDC contribution"
           value={formatToken(contributeBalance, 4, true)}

@@ -9,7 +9,7 @@ export const VERSION = process.env.NEXT_PUBLIC_VERSION
 /**
  * Used for lending page countdown
  */
-export const IDO_STARTS = moment.utc(1635087600000)
+export const IDO_STARTS = moment.utc(1635768000000)
 
 export const RPC_ENDPOINTS: WalletEndpoint[] = [
   {
@@ -48,22 +48,6 @@ export const RPC_ENDPOINTS: WalletEndpoint[] = [
     rpcName: 'RPCPool RPC',
     commitment: 'processed',
   },
-  // TODO: Filter by deployment
-  {
-    id: 'devnet',
-    network: 'devnet' as web3.Cluster,
-    rpcURL: 'https://api.devnet.solana.com',
-    rpcName: 'Solana Devnet',
-    commitment: 'processed' as web3.Commitment,
-  },
-  {
-    id: 'devnet2',
-    network: 'devnet' as web3.Cluster,
-    rpcURL:
-      'https://wispy-white-bird.solana-devnet.quiknode.pro/77f628d0d9a021582e43e00e6b16cbbe19a08bf9/',
-    rpcName: 'Solana Devnet',
-    commitment: 'processed' as web3.Commitment,
-  },
   {
     id: 'custom',
     network: 'mainnet-beta' as web3.Cluster,
@@ -86,8 +70,7 @@ export const IDO_ENDPOINTS = [
     programId: '7r2chJLUU87eaM7T1aBi6f7g9BbtbgnwQ9kPbMGxJQWV',
     usdcMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
     pools: [
-      '5JGWQPf6zLhuxL4bXa8aWKPxakqVJMWbMf9TBaVWfpXD', //Round 1
-      '9U8xzksWyGkKCAdf4yS49VftTKXk5sSurJn8xF1hcdqd', //Round 2
+      '5JGWQPf6zLhuxL4bXa8aWKPxakqVJMWbMf9TBaVWfpXD',
     ],
   },
   {
@@ -98,4 +81,4 @@ export const IDO_ENDPOINTS = [
   },
 ]
 
-export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'devnet2')
+export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'public')
