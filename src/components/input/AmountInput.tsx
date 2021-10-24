@@ -120,7 +120,7 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   )
 
   return (
-    <div className={classNames("mb-1", className)}>
+    <div className={classNames('mb-1', className)}>
       <div className="flex flex-row items-center justify-between mb-1">
         <Typography level="caption" color="secondary">
           {title}

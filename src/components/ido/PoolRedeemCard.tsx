@@ -27,7 +27,11 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   const connected = useWalletStore((s) => s.connected)
   const mints = useWalletStore((s) => s.mints)
   const largestAccounts = useLargestAccounts(pool)
-  const { slndBalance, usdcBalance: vaultUsdcBalance, fetchVaults } = useVaults(pool)
+  const {
+    slndBalance,
+    usdcBalance: vaultUsdcBalance,
+    fetchVaults,
+  } = useVaults(pool)
   const { startRedeem } = usePool(pool)
   const [submitting, setSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -96,22 +100,54 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         </Typography>
       )}
       <Col span={24} className="text-center	">
-        <Typography level="display" style={{
-          fontSize: 36,
-        }}>
+        <Typography
+          level="display"
+          style={{
+            fontSize: 36,
+          }}
+        >
           {formatToken(redeemableSlndAmount)} SLND
         </Typography>
       </Col>
       <RowMetric
         label="Total USDC raised"
-        value={<>{formatToken(idoResult?.contributed || vaultUsdcBalance, 4, true)} <TokenIcon className="inline-block" symbol="USDC" icon="usdc.svg" size="16" /></>}
+        value={
+          <>
+            {formatToken(idoResult?.contributed || vaultUsdcBalance, 4, true)}{' '}
+            <TokenIcon
+              className="inline-block"
+              symbol="USDC"
+              icon="usdc.svg"
+              size="16"
+            />
+          </>
+        }
       />
-      <RowMetric label="Total SLND for sale" value={<>{formatToken(slndBalance)}  <TokenIcon className="inline-block" symbol="SLND" icon="slnd.png" size="16" /></>} />
+      <RowMetric
+        label="Total SLND for sale"
+        value={
+          <>
+            {formatToken(slndBalance)}{' '}
+            <TokenIcon
+              className="inline-block"
+              symbol="SLND"
+              icon="slnd.png"
+              size="16"
+            />
+          </>
+        }
+      />
       <RowMetric
         label="Implied token price"
-        value={<>{estimatedPrice && !estimatedPrice.isNaN() ? 
-          <>${formatToken(estimatedPrice.toString(), 4, true)}</> 
-          : '-'}</>}
+        value={
+          <>
+            {estimatedPrice && !estimatedPrice.isNaN() ? (
+              <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+            ) : (
+              '-'
+            )}
+          </>
+        }
         tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
       />
       <Col className="m-1" />

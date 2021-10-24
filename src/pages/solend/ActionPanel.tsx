@@ -20,7 +20,12 @@ const Main: React.FC<{
   }
 
   const poolCard = pool ? (
-    <PoolCard key={pool.publicKey.toBase58()} pool={pool} round={'1'} setDrawerVisible={setDrawerVisible} />
+    <PoolCard
+      key={pool.publicKey.toBase58()}
+      pool={pool}
+      round={'1'}
+      setDrawerVisible={setDrawerVisible}
+    />
   ) : null
 
   return (

@@ -59,7 +59,7 @@ const CardBase: React.FC<CardBaseProps> = ({
           )}
           onClick={() => {
             if (canDeposit) {
-              setIsDeposit(true);
+              setIsDeposit(true)
             }
           }}
         >

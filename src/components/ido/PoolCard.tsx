@@ -12,7 +12,11 @@ interface PoolCardProps {
   setDrawerVisible: (arg: boolean) => void
 }
 
-const PoolCard: React.FC<PoolCardProps> = ({ pool, round, setDrawerVisible }) => {
+const PoolCard: React.FC<PoolCardProps> = ({
+  pool,
+  round,
+  setDrawerVisible,
+}) => {
   const { startIdo, endIdo, startRedeem, endDeposits } = usePool(pool)
   const [isDeposit, setIsDeposit] = useState(true)
 

@@ -3,6 +3,7 @@ import moment from 'moment'
 import React from 'react'
 
 import BigCountdown from '../../../components/ido/BigCountdown'
+import { IDO_STARTS } from '../../../config/constants'
 import usePool from '../../../hooks/usePool'
 import { useRefresh } from '../../../hooks/useRefresh'
 import useWalletStore from '../../../stores/useWalletStore'
@@ -18,10 +19,7 @@ const Countdown: React.FC = () => {
         <img src="/images/about_hero.png" width={360} />
       </Col>
       <Col>
-        <BigCountdown
-          date={startIdo}
-          onComplete={doForceRefresh}
-        />
+        <BigCountdown date={startIdo ?? IDO_STARTS} onComplete={doForceRefresh} />
       </Col>
     </Row>
   )

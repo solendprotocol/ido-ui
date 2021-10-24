@@ -33,10 +33,14 @@ const StatsCard: React.FC<StatsCardProps> = ({
       />
       <RowMetric
         label="Implied token price"
-        value={<>
-          {estimatedPrice && !estimatedPrice.isNaN()
-            ? <>${formatToken(estimatedPrice.toString(), 4, true)}</>
-            : '-'}</>
+        value={
+          <>
+            {estimatedPrice && !estimatedPrice.isNaN() ? (
+              <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+            ) : (
+              '-'
+            )}
+          </>
         }
       />
       <Col className="m-1" />
@@ -51,7 +55,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
           estimatedPrice && !estimatedPrice.isNaN()
             ? formatToken(
                 new BigNumber(vaultSlndBalance)
-                  .multipliedBy(new BigNumber(userUsdcDeposits).div(vaultUsdcBalance))
+                  .multipliedBy(
+                    new BigNumber(userUsdcDeposits).div(vaultUsdcBalance)
+                  )
                   .toString()
               )
             : '-'

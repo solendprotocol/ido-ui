@@ -525,7 +525,7 @@ a {
 
 .spin {
   path {
-    stroke: var(--color-text-secondary)
+    stroke: var(--color-text-secondary);
   }
 }
 
@@ -575,7 +575,7 @@ a {
 }
 
 .idoText {
-  background: -webkit-linear-gradient(#FF5C28, #FF8F28);
+  background: -webkit-linear-gradient(#ff5c28, #ff8f28);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

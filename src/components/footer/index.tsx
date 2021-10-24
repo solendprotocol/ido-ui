@@ -17,58 +17,54 @@ export const Footer: React.FC = () => {
       <Row
         className="customFooter"
         gutter={16}
-        align='middle'
-        justify='space-between'
+        align="middle"
+        justify="space-between"
       >
         <Col>
-          <Typography level='caption' color='secondary'>
+          <Typography level="caption" color="secondary">
             Solend
           </Typography>
         </Col>
         <Col>
           <Space>
-            <a
-              target='_blank'
-              href='https://solend.fi'
-              rel='noreferrer'
-            >
-              <Typography level='caption' color='secondary'>
+            <a target="_blank" href="https://solend.fi" rel="noreferrer">
+              <Typography level="caption" color="secondary">
                 App
               </Typography>
             </a>
             <a
-              target='_blank'
-              href='https://github.com/solendprotocol'
-              rel='noreferrer'
+              target="_blank"
+              href="https://github.com/solendprotocol"
+              rel="noreferrer"
             >
-              <Typography level='caption' color='secondary'>
+              <Typography level="caption" color="secondary">
                 Github
               </Typography>
             </a>
             <a
-              target='_blank'
-              href='https://twitter.com/solendprotocol'
-              rel='noreferrer'
+              target="_blank"
+              href="https://twitter.com/solendprotocol"
+              rel="noreferrer"
             >
-              <Typography level='caption' color='secondary'>
+              <Typography level="caption" color="secondary">
                 Twitter
               </Typography>
             </a>
             <a
-              target='_blank'
-              href='https://discord.gg/aGXvPNGXDT'
-              rel='noreferrer'
+              target="_blank"
+              href="https://discord.gg/aGXvPNGXDT"
+              rel="noreferrer"
             >
-              <Typography level='caption' color='secondary'>
+              <Typography level="caption" color="secondary">
                 Discord
               </Typography>
             </a>
             <a
-              target='_blank'
-              href='https://medium.com/solend'
-              rel='noreferrer'
+              target="_blank"
+              href="https://medium.com/solend"
+              rel="noreferrer"
             >
-              <Typography level='caption' color='secondary'>
+              <Typography level="caption" color="secondary">
                 Blog
               </Typography>
             </a>

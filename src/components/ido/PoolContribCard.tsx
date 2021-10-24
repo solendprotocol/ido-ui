@@ -3,8 +3,8 @@ import { Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactMomentCountDown from 'react-moment-countdown'
-import useDeviceMode from '../../hooks/useDeviceMode'
 
+import useDeviceMode from '../../hooks/useDeviceMode'
 // import useIpAddress from '../../hooks/useIpAddress's
 import useLargestAccounts from '../../hooks/useLargestAccounts'
 import usePool from '../../hooks/usePool'
@@ -32,7 +32,7 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
   setIsDeposit,
   setDrawerVisible,
 }) => {
-  const { isMobile } = useDeviceMode();
+  const { isMobile } = useDeviceMode()
   const actions = useWalletStore((s) => s.actions)
   const connected = useWalletStore((s) => s.connected)
   const largestAccounts = useLargestAccounts(pool)
@@ -175,55 +175,59 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
 
   return (
     <Row justify="center" className="modal">
-      {canDeposit ? <Typography className="contributeCountdown">
-          Sale period ends in {' '}
-        <ReactMomentCountDown toDate={endDeposits} />
-      </Typography> : <Typography className="contributeCountdown">
-          Grace period ends in {' '}
-        <ReactMomentCountDown toDate={endIdo} />
-      </Typography>}
-        <AmountInput
-          className="w-full mt-1"
-          title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
-          placeholder="0"
-          maxValue={totalBalance.toString()}
-          maxIsLoading={connected && loading}
-          maxIsRefreshing={refreshing}
-          maxLabel={isDeposit ? `Balance:` : `Max withdraw:`}
-          errorMessage={inputError.message}
-          hasError={inputError.hasError}
-          tokenSymbol="USDC"
-          tokenIcon="usdc.svg"
-          value={inputAmount}
-          valueRound="ceil"
-          decimals={6}
-          onRefreshMax={handleRefresh}
-          onChange={handleChangeAmount}
-          disabled={!connected}
-        />
-        <StatsCard
-          vaultSlndBalance={vaults.slndBalance}
-          vaultUsdcBalance={vaults.usdcBalance}
-          estimatedPrice={vaults.estimatedPrice}
-          userUsdcDeposits={redeemableBalance}
-        />
+      {canDeposit ? (
+        <Typography className="contributeCountdown">
+          Sale period ends in <ReactMomentCountDown toDate={endDeposits} />
+        </Typography>
+      ) : (
+        <Typography className="contributeCountdown">
+          Grace period ends in <ReactMomentCountDown toDate={endIdo} />
+        </Typography>
+      )}
+      <AmountInput
+        className="w-full mt-1"
+        title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
+        placeholder="0"
+        maxValue={totalBalance.toString()}
+        maxIsLoading={connected && loading}
+        maxIsRefreshing={refreshing}
+        maxLabel={isDeposit ? `Balance:` : `Max withdraw:`}
+        errorMessage={inputError.message}
+        hasError={inputError.hasError}
+        tokenSymbol="USDC"
+        tokenIcon="usdc.svg"
+        value={inputAmount}
+        valueRound="ceil"
+        decimals={6}
+        onRefreshMax={handleRefresh}
+        onChange={handleChangeAmount}
+        disabled={!connected}
+      />
+      <StatsCard
+        vaultSlndBalance={vaults.slndBalance}
+        vaultUsdcBalance={vaults.usdcBalance}
+        estimatedPrice={vaults.estimatedPrice}
+        userUsdcDeposits={redeemableBalance}
+      />
+      <Button
+        onClick={handleSubmitContribution}
+        className="w-full"
+        disabled={disableSubmit}
+        isLoading={submitting}
+      >
+        {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
+      </Button>
+      {isMobile && (
         <Button
-          onClick={handleSubmitContribution}
-          className="w-full"
-          disabled={disableSubmit}
-          isLoading={submitting}
-        >
-          {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
-        </Button>
-        {isMobile && <Button
           onClick={() => setDrawerVisible(false)}
           className="w-full rpcBtnColors"
         >
           Back
-        </Button>}
-        <Typography color="secondary" className="modalFooter">
-          {formatToken(usdcBalance)} USDC in wallet
-        </Typography>
+        </Button>
+      )}
+      <Typography color="secondary" className="modalFooter">
+        {formatToken(usdcBalance)} USDC in wallet
+      </Typography>
     </Row>
   )
 }
