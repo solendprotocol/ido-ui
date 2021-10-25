@@ -11,7 +11,6 @@ import usePool from '../hooks/usePool'
 import useWalletStore from '../stores/useWalletStore'
 import AboutPanel from './solend/AboutPanel'
 import ActionPanel from './solend/ActionPanel'
-import Backers from './solend/Backers'
 
 const Page: React.FC = () => {
   const pool = useWalletStore((s) => s.pools)[0]
@@ -42,7 +41,6 @@ const Page: React.FC = () => {
             </Col>
           )}
         </Row>
-        <Backers/>
       </div>
       <Footer />
     </>

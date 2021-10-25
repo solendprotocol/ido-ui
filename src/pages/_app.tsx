@@ -24,7 +24,7 @@ BigNumber.config({
 function MyApp({ Component, pageProps }) {
   const title = 'Solend IDO'
   const description =
-    'Solend is the autonomous interest rate machine for SolanaThis is the IDO (initial DEX offering) page for Solend P, a liquidity network for borrowing and lending on Solana. Get access to PRT tokens!'
+    'Solend is the autonomous interest rate machine for SolanaThis is the IDO (initial DEX offering) page for Solend P, a liquidity network for borrowing and lending on Solana.'
   const keywords = 'Solend, IDO, DeFi, Solana, Lending, Borrow'
   const baseUrl = 'https://ido.solend.fi'
 
@@ -47,9 +47,9 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${baseUrl}/images/og.png`} />
+        <meta property="og:image" content={`${baseUrl}/images/og.jpeg`} />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@gopartyparrot" />
+        <meta name="twitter:site" content="@solendprotocol" />
       </Head>
       <ThemeProvider defaultTheme="dark" attribute="class">
         <WalletProvider
