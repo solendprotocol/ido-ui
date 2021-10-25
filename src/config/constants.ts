@@ -69,9 +69,7 @@ export const IDO_ENDPOINTS = [
     network: 'mainnet-beta' as web3.Cluster,
     programId: '7r2chJLUU87eaM7T1aBi6f7g9BbtbgnwQ9kPbMGxJQWV',
     usdcMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-    pools: [
-      '5JGWQPf6zLhuxL4bXa8aWKPxakqVJMWbMf9TBaVWfpXD',
-    ],
+    pools: ['5JGWQPf6zLhuxL4bXa8aWKPxakqVJMWbMf9TBaVWfpXD'],
   },
   {
     network: 'devnet' as web3.Cluster,
@@ -81,4 +79,4 @@ export const IDO_ENDPOINTS = [
   },
 ]
 
-export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'public')
+export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'quicknode')
