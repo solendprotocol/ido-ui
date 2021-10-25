@@ -63,14 +63,14 @@ const CardBase: React.FC<{
           <Typography level="headline">How it works</Typography>
           <br />
           <Typography color="secondary">
-            The token sale consists of two consecutive 24 hour phases:
+            The IDO consists of two consecutive 24 hour phases:
             <br />- <u>Sale period</u>: USDC may be deposited or withdrawn from
-            the pool. SLND price will flunctuate based on the size of the pool.
+            the pool. SLND price will fluctuate based on the size of the pool.
             <br />- <u>Grace period</u>: USDC may only be withdrawn from the
             pool. SLND price will only go down in this phase.
             <br />
             <br />
-            Afterwards, depositers can redeem an amount of SLND tokens
+            Afterwards, depositors can redeem an amount of SLND tokens
             proprotional to their share of the pool.
           </Typography>
         </div>
