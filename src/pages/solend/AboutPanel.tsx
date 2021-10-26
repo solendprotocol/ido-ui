@@ -155,8 +155,11 @@ const CardBase: React.FC<{
       </Col>
       <Col>
         <Typography level="headline">
-          {/* TODO UPDATE */}
-          <a target="_blank" href="/" rel="noreferrer">
+          <a
+            target="_blank"
+            href="https://medium.com/solend/fundraise-tokenomics-and-ido-f9536b061973"
+            rel="noreferrer"
+          >
             <u>Learn more</u>
           </a>
         </Typography>
