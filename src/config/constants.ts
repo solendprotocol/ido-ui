@@ -67,9 +67,9 @@ export const IDO_RESULTS = {
 export const IDO_ENDPOINTS = [
   {
     network: 'mainnet-beta' as web3.Cluster,
-    programId: '7r2chJLUU87eaM7T1aBi6f7g9BbtbgnwQ9kPbMGxJQWV',
+    programId: '8SBvVZtJbHPQVhbsmQz8c4Msyj2i1WYrigMEi2BY2YHH',
     usdcMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-    pools: ['5JGWQPf6zLhuxL4bXa8aWKPxakqVJMWbMf9TBaVWfpXD'],
+    pools: ['F2TkNeTKE1BdEaXo54E5rJxHx7bbpUBiUFNLH2WtwN1N'],
   },
   {
     network: 'devnet' as web3.Cluster,

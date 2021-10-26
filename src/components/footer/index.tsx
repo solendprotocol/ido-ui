@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
             </a>
             <a
               target="_blank"
-              href="https://github.com/solendprotocol"
+              href="https://github.com/solendprotocol/ido-ui"
               rel="noreferrer"
             >
               <Typography level="caption" color="secondary">

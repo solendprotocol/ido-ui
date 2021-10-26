@@ -6,6 +6,7 @@ import { Button } from '../../components/button'
 import BigCountdown from '../../components/ido/BigCountdown'
 import Typography from '../../components/typography/Typography'
 import { IDO_STARTS } from '../../config/constants'
+import { DISALLOWED_COUNTRIES, useCountry } from '../../hooks/useCountry'
 import useDeviceMode from '../../hooks/useDeviceMode'
 import usePool from '../../hooks/usePool'
 import { useRefresh } from '../../hooks/useRefresh'
@@ -18,6 +19,63 @@ const CardBase: React.FC<{
   const { startIdo, endDeposits, endIdo, startRedeem } = usePool(pool)
   const { isMobile } = useDeviceMode()
   const { doForceRefresh } = useRefresh()
+  const countryCode = useCountry()
+
+  let mobileCta =
+    IDO_STARTS.isAfter() || startIdo?.isAfter() ? (
+      <Col className="w-full text-center">
+        <Typography>Begins in:</Typography>
+        <BigCountdown
+          date={IDO_STARTS ?? startIdo}
+          onComplete={doForceRefresh}
+        />
+      </Col>
+    ) : (
+      <Col span={24}>
+        <Button
+          onClick={() => setDrawerVisible(true)}
+          className="w-full participate primaryBtnColors"
+        >
+          Participate
+        </Button>
+      </Col>
+    )
+
+  if (DISALLOWED_COUNTRIES.includes(countryCode ?? '')) {
+    mobileCta = (
+      <Col className="w-full text-center mb-4">
+        <Typography>
+          <Typography level="headline">
+            Sorry, you are not able to participate in the Solend IDO from your
+            country.
+          </Typography>
+          <br />
+          If you think your access is restricted by mistake or have another
+          question, please contact us via{' '}
+          <a href="mailto:team@solend.fi">
+            <u>Email</u>
+          </a>
+          ,{' '}
+          <a
+            target="_blank"
+            href="https://twitter.com/solendprotocol"
+            rel="noreferrer"
+          >
+            <u>Twitter</u>
+          </a>
+          , or{' '}
+          <a
+            target="_blank"
+            href="https://discord.gg/aGXvPNGXDT"
+            rel="noreferrer"
+          >
+            <u>Discord</u>
+          </a>
+          .
+        </Typography>
+      </Col>
+    )
+  }
 
   return (
     <Row
@@ -39,25 +97,7 @@ const CardBase: React.FC<{
           </Typography>
         </Typography>
       </Col>
-      {isMobile &&
-        (IDO_STARTS.isAfter() || startIdo?.isAfter() ? (
-          <Col className="w-full text-center">
-            <Typography>Begins in:</Typography>
-            <BigCountdown
-              date={IDO_STARTS ?? startIdo}
-              onComplete={doForceRefresh}
-            />
-          </Col>
-        ) : (
-          <Col span={24}>
-            <Button
-              onClick={() => setDrawerVisible(true)}
-              className="w-full participate primaryBtnColors"
-            >
-              Participate
-            </Button>
-          </Col>
-        ))}
+      {isMobile && mobileCta}
       <Col span={24}>
         <div className="card w-full">
           <Typography level="headline">How it works</Typography>
