@@ -22,30 +22,38 @@ BigNumber.config({
 })
 
 function MyApp({ Component, pageProps }) {
-  const title = 'Parrot Protocol IDO'
+  const title = 'Solend IDO'
   const description =
-    'This is the IDO (initial DEX offering) page for Parrot Protocol, a liquidity network for borrowing and lending on Solana. Get access to PRT tokens!'
-  const keywords = 'Parrot, IDO, DeFi, Solana, Lending, Borrow'
-  const baseUrl = 'https://ido.parrot.fi'
+    'Solend is the autonomous interest rate machine for SolanaThis is the IDO (initial DEX offering) page for Solend P, a liquidity network for borrowing and lending on Solana.'
+  const keywords = 'Solend, IDO, DeFi, Solana, Lending, Borrow'
+  const baseUrl = 'https://ido.solend.fi'
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <link rel="icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content={keywords} />
         <meta name="description" content={description} />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${baseUrl}/images/og.png`} />
+        <meta property="og:image" content={`${baseUrl}/images/og.jpeg`} />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@gopartyparrot" />
+        <meta name="twitter:site" content="@solendprotocol" />
       </Head>
       <ThemeProvider defaultTheme="dark" attribute="class">
         <WalletProvider

@@ -13,9 +13,15 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
   className,
   onShowWallets,
 }) => {
-  const { wallet, connected, deactivate } = useWallet()
+  const { wallet, connected, deactivate, onNotify } = useWallet()
 
   const [onPresentConnectWallet] = useModal(<WalletModal />)
+
+  onNotify({
+    type: 'error',
+    title: 'fsdafsadf',
+    message: 'fasfsadfsd',
+  })
 
   const handleConnect = useCallback(() => {
     if (connected && wallet) {
@@ -33,15 +39,22 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
       className={classNames(
         'h-10 px-4 text-sm font-bold rounded-xl border flex flex-row items-center justify-center',
         'outline-none focus:outline-none hover:text-white',
-        'shadow-outerButton custom-button-active-effect',
         {
           'text-brandPrimary hover:bg-brandPrimaryHover': !connected,
           'text-failure hover:bg-failureHover': connected,
         },
-        className
+        className,
+        'headerBtn'
       )}
       onClick={handleConnect}
     >
+      <img
+        alt=""
+        width="20"
+        height="20"
+        src="/icons/wallet.svg"
+        className="mr-2"
+      />
       {connected == true ? 'Disconnect' : 'Connect Wallet'}
     </button>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import usePool from '../../hooks/usePool'
 import { PoolAccount } from '../../stores/useWalletStore'
@@ -9,14 +9,38 @@ import PoolRedeemCard from './PoolRedeemCard'
 interface PoolCardProps {
   pool: PoolAccount
   round?: string
+  setDrawerVisible: (arg: boolean) => void
 }
 
-const PoolCard: React.FC<PoolCardProps> = ({ pool, round }) => {
+const PoolCard: React.FC<PoolCardProps> = ({
+  pool,
+  round,
+  setDrawerVisible,
+}) => {
   const { startIdo, endIdo, startRedeem, endDeposits } = usePool(pool)
+  const [isDeposit, setIsDeposit] = useState(true)
+
+  useEffect(() => {
+    if (endDeposits.isBefore()) {
+      setIsDeposit(false)
+    }
+  }, [endDeposits])
 
   return (
-    <CardOverlay title={`IDO Round ${round}`} pool={pool}>
-      {endIdo.isAfter() && <PoolContribCard pool={pool} />}
+    <CardOverlay
+      title={`IDO Round ${round}`}
+      pool={pool}
+      isDeposit={isDeposit}
+      setIsDeposit={setIsDeposit}
+    >
+      {endIdo.isAfter() && (
+        <PoolContribCard
+          isDeposit={isDeposit}
+          setIsDeposit={setIsDeposit}
+          pool={pool}
+          setDrawerVisible={setDrawerVisible}
+        />
+      )}
       {endIdo.isBefore() && <PoolRedeemCard pool={pool} />}
       {/* Debug stats */}
       <div className="hidden bg-secondary rounded-xl p-2 mt-4 space-y-3 font-mono text-xs">

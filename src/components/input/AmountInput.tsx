@@ -5,9 +5,11 @@ import React, { useCallback } from 'react'
 import NumberFormat, { NumberFormatValues } from 'react-number-format'
 
 import SortDown from '../../../public/icons/sort-down.svg'
+import { formatToken } from '../../utils/numberFormatter'
 import { TokenIcon } from '../icons'
 import PercentButton from '../percent-button'
 import { Spinner } from '../spinner'
+import Typography from '../typography/Typography'
 
 const toSafeNum = (
   value: string,
@@ -118,9 +120,11 @@ export const AmountInput: React.FC<AmountInputProps> = ({
   )
 
   return (
-    <div className="mb-3">
-      <div className="flex flex-row items-center justify-between mb-3">
-        <label className="flex-1 text-sm font-bold">{title}</label>
+    <div className={classNames('mb-1', className)}>
+      <div className="flex flex-row items-center justify-between mb-1">
+        <Typography level="caption" color="secondary">
+          {title}
+        </Typography>
         {!!maxValue && (
           <PercentButton
             disabled={disabled && maxIsLoading}
@@ -171,18 +175,6 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           disabled={disabled}
         >
           <TokenIcon symbol={tokenSymbol} icon={tokenIcon} size="24" />
-          <div
-            className={classNames('min-w-symbol flex flex-col items-center', {
-              'text-disabled': disabled,
-            })}
-          >
-            <span className="px-1">{tokenSymbol}</span>
-            {tokenNameDetail && (
-              <span className="text-xs text-secondary mt-1">
-                {tokenNameDetail}
-              </span>
-            )}
-          </div>
           {!!onSelectToken && (
             <SortDown
               className={classNames('w-2 ml-2 relative fill-current', {
@@ -201,13 +193,15 @@ export const AmountInput: React.FC<AmountInputProps> = ({
           className="text-xs text-secondary outline-none focus:outline-none"
           onClick={handleSelectMax}
         >
-          {maxLabel} {maxIsLoading ? '' : maxValue}
+          <Typography level="caption" color="secondary">
+            {maxLabel} {maxIsLoading ? '' : formatToken(maxValue)}
+          </Typography>
         </button>
         {maxIsLoading && <Spinner className="mx-1" size="sm" />}
         {onRefreshMax && (
           <button disabled={maxIsRefreshing} onClick={onRefreshMax}>
             <RefreshIcon
-              className={classNames('w-3 h-3 ml-1', {
+              className={classNames('w-3 h-3 ml-1 spin', {
                 'animate-spin': maxIsRefreshing,
               })}
             />

@@ -1,18 +1,16 @@
-# Parrot IDO - Frontend
+# Solend IDO - Frontend
 
-A modification of the [Mango Token Sale](https://github.com/blockworks-foundation/mango-token-sale) with some improvements.
+The repo running the [Solend IDO site](https://ido.solend.fi/). This is a fork of the [Parrot IDO site](https://github.com/gopartyparrot/parrot-ido) which itself was modification of the [Mango Token Sale](https://github.com/blockworks-foundation/mango-token-sale) with some improvements.
 
-- Support for multiple IDO pools
-- Support for RPC selection
-- Parrot UI components/styling
+Changes were mostly stylistic to follow the Solend design system.
 
-# Security
+# Before running
 
-Review that mainnet addresses in [constants.ts](./src/config/constants.ts) match the [Parrot IDO mainnet addresses](https://doc.parrot.fi/security/mainnet.html#prt-ido).
+Update that mainnet addresses on `IDO_ENDPOINTS` in [constants.ts](./src/config/constants.ts) to match the [Solend IDO mainnet addresses](https://docs.solend.fi/protocol/addresses/ido-addresses).
 
 # Serving The UI
 
-The IDO UI is hosted at https://ido.parrot.fi/, but if you'd like to server your own UI, a pre-compiled static HTML site is available in `out`. You can use any static web server to serve that content.
+The IDO UI is hosted at https://ido.solend.fi/, but if you'd like to server your own UI, a pre-compiled static HTML site is available in `out`. You can use any static web server to serve that content.
 
 For example, to use python's http server:
 
@@ -20,9 +18,7 @@ For example, to use python's http server:
 (cd out && python3 -m http.server 8899)
 ```
 
-Then open http://localhost:8899, you should see the IDO UI:
-
-![](./images/ido-ui.png)
+Then open http://localhost:8899.
 
 # Development
 

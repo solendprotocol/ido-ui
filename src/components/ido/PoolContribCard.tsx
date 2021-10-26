@@ -1,34 +1,48 @@
 import { InformationCircleIcon } from '@heroicons/react/outline'
+import { Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
+import ReactMomentCountDown from 'react-moment-countdown'
 
+import useDeviceMode from '../../hooks/useDeviceMode'
 // import useIpAddress from '../../hooks/useIpAddress's
 import useLargestAccounts from '../../hooks/useLargestAccounts'
 import usePool from '../../hooks/usePool'
 import useVaults from '../../hooks/useVaults'
 import { notify } from '../../stores/useNotificationStore'
 import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
+import { formatToken } from '../../utils/numberFormatter'
 import { Button } from '../button'
 import { AmountInput } from '../input/AmountInput'
 import { ButtonMenu, ButtonMenuItem } from '../menu'
+import Typography from '../typography/Typography'
+import Countdown from './Countdown'
 import StatsCard from './StatsCard'
 
 interface PoolContribCardProps {
   pool: PoolAccount
+  isDeposit: boolean
+  setIsDeposit: (arg: boolean) => void
+  setDrawerVisible: (arg: boolean) => void
 }
 
-const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
+const PoolContribCard: React.FC<PoolContribCardProps> = ({
+  pool,
+  isDeposit,
+  setIsDeposit,
+  setDrawerVisible,
+}) => {
+  const { isMobile } = useDeviceMode()
   const actions = useWalletStore((s) => s.actions)
   const connected = useWalletStore((s) => s.connected)
   const largestAccounts = useLargestAccounts(pool)
   const { startIdo, endIdo, endDeposits, poolStatus } = usePool(pool)
   const vaults = useVaults(pool)
-  // const { ipAllowed } = useIpAddress()
 
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-  const [isDeposit, setIsDeposit] = useState(true)
+
   const [inputAmount, setInputAmount] = useState('0')
 
   const usdcBalance = largestAccounts.usdc?.balance || 0
@@ -160,22 +174,24 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
     (isDeposit ? !canDeposit : !canWithdraw)
 
   return (
-    <>
-      <ButtonMenu
-        activeIndex={isDeposit ? 0 : 1}
-        onItemClick={handleChangeMode}
-      >
-        <ButtonMenuItem disabled={!canDeposit}>Deposit</ButtonMenuItem>
-        <ButtonMenuItem>Withdraw</ButtonMenuItem>
-      </ButtonMenu>
-      <div className="mt-4" />
+    <Row justify="center" className="modal">
+      {canDeposit ? (
+        <Typography className="contributeCountdown">
+          Sale period ends in <ReactMomentCountDown toDate={endDeposits} />
+        </Typography>
+      ) : (
+        <Typography className="contributeCountdown">
+          Grace period ends in <ReactMomentCountDown toDate={endIdo} />
+        </Typography>
+      )}
       <AmountInput
-        title={isDeposit ? 'I want to deposit' : 'Withdraw collateral'}
+        className="w-full mt-1"
+        title={isDeposit ? 'Deposit' : 'Withdraw collateral'}
         placeholder="0"
         maxValue={totalBalance.toString()}
         maxIsLoading={connected && loading}
         maxIsRefreshing={refreshing}
-        maxLabel={isDeposit ? `balance:` : `max withdraw:`}
+        maxLabel={isDeposit ? `Balance:` : `Max withdraw:`}
         errorMessage={inputError.message}
         hasError={inputError.hasError}
         tokenSymbol="USDC"
@@ -187,35 +203,32 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({ pool }) => {
         onChange={handleChangeAmount}
         disabled={!connected}
       />
+      <StatsCard
+        vaultSlndBalance={vaults.slndBalance}
+        vaultUsdcBalance={vaults.usdcBalance}
+        estimatedPrice={vaults.estimatedPrice}
+        userUsdcDeposits={redeemableBalance}
+      />
       <Button
         onClick={handleSubmitContribution}
-        className="w-full my-4"
+        className="w-full"
         disabled={disableSubmit}
         isLoading={submitting}
       >
         {submitting ? 'Waiting approval' : isDeposit ? `Deposit` : `Withdraw`}
       </Button>
-      {/* Country Not Allowed 🇺🇸😭 */}
-      {endDeposits?.isBefore() && endIdo?.isAfter() && (
-        <div className="flex items-center space-x-2 mb-4">
-          <InformationCircleIcon className="h-5 w-5 text-secondary" />
-          <div className="text-xxs sm:text-xs">
-            <p className="mb-1">
-              You can only withdraw your contribution during the grace period.
-            </p>
-            <p>Any withdrawals cannot be reversed.</p>
-          </div>
-        </div>
+      {isMobile && (
+        <Button
+          onClick={() => setDrawerVisible(false)}
+          className="w-full rpcBtnColors"
+        >
+          Back
+        </Button>
       )}
-      <StatsCard
-        endDeposits={endDeposits}
-        endIdo={endIdo}
-        poolStatus={poolStatus}
-        vaultPrtBalance={vaults.prtBalance}
-        vaultUsdcBalance={vaults.usdcBalance}
-        estimatedPrice={vaults.estimatedPrice}
-      />
-    </>
+      <Typography color="secondary" className="modalFooter">
+        {formatToken(usdcBalance)} USDC in wallet
+      </Typography>
+    </Row>
   )
 }
 

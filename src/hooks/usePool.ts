@@ -29,13 +29,14 @@ export default function usePool(pool: PoolAccount) {
       ? 'The IDO has ended'
       : 'The IDO is starting...'
 
+  // DELETEME
   return {
     updated,
     pool,
     startIdo,
+    endDeposits,
     endIdo,
     startRedeem,
-    endDeposits,
     poolStatus,
   }
 }

@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { cloneElement, ElementType, isValidElement } from 'react'
 
 import { Spinner } from '../spinner'
+import Typography from '../typography/Typography'
 import { ButtonProps, sizes, variants } from './types'
 
 const Button = <E extends ElementType = 'button'>(
@@ -25,7 +26,7 @@ const Button = <E extends ElementType = 'button'>(
     <button
       disabled={isDisabled}
       className={classNames(
-        'font-bold px-4 flex flex-row items-center justify-center outline-none ring-opacity-75 text-white focus:outline-none custom-button-active-effect',
+        'font-bold px-4 flex flex-row items-center justify-center outline-none ring-opacity-75 text-black focus:outline-none custom-button-active-effect',
         {
           'w-full': block,
           'py-2': size !== sizes.XS,
@@ -39,23 +40,25 @@ const Button = <E extends ElementType = 'button'>(
           'rounded-xl': size === sizes.MD,
           rounded: size === sizes.XS,
           'rounded-lg': size === sizes.SM,
-          'bg-brandPrimary hover:bg-brandPrimaryHover':
-            variant === variants.PRIMARY,
+          'bg-black hover:bg-blackHover': variant === variants.PRIMARY,
           'bg-brandSecondary hover:bg-brandSecondaryHover':
             variant === variants.SECONDARY,
           'bg-failure hover:bg-failureHover': variant === variants.DANGER,
-          'bg-disabled hover:bg-disabled active:shadow-none cursor-now-allowed remove-active-effect':
+          'bg-disabled hover:bg-disabled active:shadow-none cursor-not-allowed remove-active-effect':
             isDisabled,
           'text-disabled': isDisabled,
         },
-        className
+        className,
+        'mainBtn'
       )}
       {...rest}
     >
       <>
         {isLoading && <Spinner className="mr-2" />}
         {isValidElement(startIcon) && cloneElement(startIcon)}
-        {children}
+        <Typography level="headline" className="m-0">
+          {children}
+        </Typography>
         {isValidElement(endIcon) && cloneElement(endIcon)}
       </>
     </button>

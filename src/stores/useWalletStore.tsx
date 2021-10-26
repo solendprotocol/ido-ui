@@ -326,8 +326,6 @@ const useWalletStore = create<WalletStore>((set, get) => ({
         pool.watermelonMint
       )
 
-      console.log('exchangeRedeemableForMango', redeemable, watermelon)
-
       const [poolSigner] = await web3.PublicKey.findProgramAddress(
         [pool.watermelonMint.toBuffer()],
         program.programId
@@ -370,7 +368,7 @@ const useWalletStore = create<WalletStore>((set, get) => ({
         wallet,
         connection,
         sendingMessage: 'Sending redeem transaction...',
-        successMessage: 'PRT redeemed successfully!',
+        successMessage: 'SLND redeemed successfully!',
       })
       await actions.fetchWalletTokenAccounts()
     },

@@ -10,13 +10,13 @@ import useInterval from './useInterval'
 export default function useVaults(pool: PoolAccount) {
   const { mints, actions } = useWalletStore((s) => s)
   const [usdcVault, setUsdcVault] = useState<TokenAccount | undefined>()
-  const [prtVault, setPrtVault] = useState<TokenAccount | undefined>()
+  const [slndVault, setSlndVault] = useState<TokenAccount | undefined>()
 
   const fetchVaults = useCallback(async () => {
     const { usdc, watermelon } = await actions.fetchVaults(pool)
     setUsdcVault(usdc)
-    setPrtVault(watermelon)
-  }, [actions, setUsdcVault, setPrtVault])
+    setSlndVault(watermelon)
+  }, [actions, setUsdcVault, setSlndVault])
 
   useEffect(() => {
     fetchVaults().catch((e) => {
@@ -39,18 +39,18 @@ export default function useVaults(pool: PoolAccount) {
     () => calculateBalance(mints, usdcVault),
     [mints, usdcVault]
   )
-  const prtBalance = useMemo(
-    () => calculateBalance(mints, prtVault),
-    [mints, prtVault]
+  const slndBalance = useMemo(
+    () => calculateBalance(mints, slndVault),
+    [mints, slndVault]
   )
 
   const estimatedPrice = useMemo(
     () =>
-      usdcBalance && prtBalance
-        ? new BigNumber(usdcBalance).dividedBy(prtBalance)
+      usdcBalance && slndBalance
+        ? new BigNumber(usdcBalance).dividedBy(slndBalance)
         : undefined,
-    [usdcBalance, prtBalance]
+    [usdcBalance, slndBalance]
   )
 
-  return { usdcBalance, prtBalance, estimatedPrice, fetchVaults }
+  return { usdcBalance, slndBalance, estimatedPrice, fetchVaults }
 }

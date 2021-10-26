@@ -1,5 +1,7 @@
+import { Col, Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import ReactMomentCountDown from 'react-moment-countdown'
 
 import { IDO_RESULTS } from '../../config/constants'
 import useLargestAccounts from '../../hooks/useLargestAccounts'
@@ -7,10 +9,14 @@ import usePool from '../../hooks/usePool'
 import useVaults from '../../hooks/useVaults'
 import { notify } from '../../stores/useNotificationStore'
 import useWalletStore, { PoolAccount } from '../../stores/useWalletStore'
-import { calculateSupply } from '../../utils/balance'
+import { calculateBalance, calculateSupply } from '../../utils/balance'
+import { formatToken, formatUSD } from '../../utils/numberFormatter'
 import { Button } from '../button'
+import { TokenIcon } from '../icons'
 import NumberText from '../texts/Number'
+import Typography from '../typography/Typography'
 import PoolCountdown from './PoolCountdown'
+import RowMetric from './RowMetric'
 
 interface PoolRedeemCardProps {
   pool: PoolAccount
@@ -21,19 +27,24 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
   const connected = useWalletStore((s) => s.connected)
   const mints = useWalletStore((s) => s.mints)
   const largestAccounts = useLargestAccounts(pool)
-  const { prtBalance, usdcBalance, fetchVaults } = useVaults(pool)
-  const { startRedeem, poolStatus } = usePool(pool)
+  const {
+    slndBalance,
+    usdcBalance: vaultUsdcBalance,
+    fetchVaults,
+  } = useVaults(pool)
+  const { startRedeem } = usePool(pool)
   const [submitting, setSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const contributeBalance = largestAccounts.redeemable?.balance || 0
+  const userUsdcAmount = largestAccounts.usdc?.balance || 0
 
-  const redeemablePrtAmount = useMemo(() => {
+  const redeemableSlndAmount = useMemo(() => {
     const redeemableSupply = calculateSupply(mints, pool.redeemableMint)
-    return prtBalance && redeemableSupply
-      ? (contributeBalance * prtBalance) / redeemableSupply
+    return slndBalance && redeemableSupply
+      ? (contributeBalance * slndBalance) / redeemableSupply
       : 0
-  }, [prtBalance, contributeBalance, mints, pool.redeemableMint])
+  }, [slndBalance, contributeBalance, mints, pool.redeemableMint])
 
   const handleRedeem = useCallback(() => {
     setSubmitting(true)
@@ -74,103 +85,96 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
 
   const idoResult = IDO_RESULTS[pool.publicKey.toBase58()]
   const estimatedPrice = new BigNumber(
-    idoResult?.contributed || usdcBalance
-  ).dividedBy(idoResult?.allocation || prtBalance)
+    idoResult?.contributed || vaultUsdcBalance
+  ).dividedBy(idoResult?.allocation || slndBalance)
 
   const disableSubmit =
-    !connected || loading || redeemablePrtAmount <= 0 || startRedeem.isAfter()
+    !connected || loading || redeemableSlndAmount <= 0 || startRedeem.isAfter()
 
   return (
-    <div className="">
+    <Row className="modal relative" justify="center">
       {startRedeem.isAfter() && (
-        <div className="bg-secondary rounded-xl p-6 text-center mb-2">
-          <p className="text-sm text-secondary">Redeem starts</p>
-          <PoolCountdown
-            poolStatus={poolStatus}
-            date={startRedeem}
-            className="justify-center pt-2"
-          />
-        </div>
+        <Typography className="redeemCountdown">
+          You can redeem your token in{' '}
+          <ReactMomentCountDown toDate={startRedeem} />
+        </Typography>
       )}
-      <div className="bg-secondary rounded-xl p-6 text-center">
-        <p className="text-sm text-secondary">Total raised</p>
-        <div className="flex items-center justify-center pt-2">
-          <img
-            alt=""
-            width="20"
-            height="20"
-            src="/icons/usdc.svg"
-            className="mr-2"
-          />
-          <NumberText
-            className="font-bold text-mdx"
-            value={idoResult?.contributed || usdcBalance}
-            defaultIfNull="N/A"
-          />
-        </div>
-      </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Token Price</p>
-        <div className="flex items-center justify-center pt-2">
-          <img
-            alt=""
-            width="20"
-            height="20"
-            src="/icons/usdc.svg"
-            className="mr-2"
-          />
-          <NumberText
-            className="font-bold text-mdx"
-            value={estimatedPrice}
-            defaultIfNull="N/A"
-            displayDecimals={6}
-          />
-        </div>
-      </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Your contribution</p>
-        <div className="flex items-center justify-center pt-2">
-          <img
-            alt=""
-            width="20"
-            height="20"
-            src="/icons/usdc.svg"
-            className="mr-2"
-          />
-          <NumberText
-            className="font-bold text-mdx"
-            value={contributeBalance}
-            defaultIfNull="N/A"
-          />
-        </div>
-      </div>
-      <div className="bg-secondary rounded-xl p-6 text-center mt-2">
-        <p className="text-sm text-secondary">Redeemable amount</p>
-        <div className="flex items-center justify-center pt-2">
-          <img
-            alt=""
-            width="20"
-            height="20"
-            src="/icons/prt.svg"
-            className="mr-2"
-          />
-          <NumberText
-            className="font-bold text-mdx"
-            value={redeemablePrtAmount}
-            displayDecimals={6}
-            defaultIfNull="N/A"
-          />
-        </div>
-      </div>
+      <Col span={24} className="text-center	">
+        <Typography
+          level="display"
+          style={{
+            fontSize: 36,
+          }}
+        >
+          {formatToken(redeemableSlndAmount)} SLND
+        </Typography>
+      </Col>
+      <RowMetric
+        label="Total USDC raised"
+        value={
+          <>
+            {formatToken(idoResult?.contributed || vaultUsdcBalance, 4, true)}{' '}
+            <TokenIcon
+              className="inline-block"
+              symbol="USDC"
+              icon="usdc.svg"
+              size="16"
+            />
+          </>
+        }
+      />
+      <RowMetric
+        label="Total SLND for sale"
+        value={
+          <>
+            {formatToken(idoResult?.allocation || slndBalance)}{' '}
+            <TokenIcon
+              className="inline-block"
+              symbol="SLND"
+              icon="slnd.png"
+              size="16"
+            />
+          </>
+        }
+      />
+      <RowMetric
+        label="Implied token price"
+        value={
+          <>
+            {estimatedPrice && !estimatedPrice.isNaN() ? (
+              <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+            ) : (
+              '-'
+            )}
+          </>
+        }
+        tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
+      />
+      <Col className="m-1" />
+      {contributeBalance && contributeBalance > 0 && (
+        <RowMetric
+          label="Your USDC contribution"
+          value={formatToken(contributeBalance, 4, true)}
+          className="card"
+        />
+      )}
+      <RowMetric
+        label="Redeemable SLND"
+        value={formatToken(redeemableSlndAmount, 4, true)}
+        className="card"
+      />
       <Button
         onClick={handleRedeem}
-        className="w-full mt-6"
         disabled={disableSubmit}
         isLoading={submitting}
+        variant="secondary"
       >
-        {submitting ? 'Waiting approval' : 'Redeem PRT'}
+        {submitting ? 'Waiting approval' : 'Redeem SLND'}
       </Button>
-    </div>
+      <Typography color="secondary" className="modalFooter">
+        {formatToken(userUsdcAmount)} USDC in wallet
+      </Typography>
+    </Row>
   )
 }
 
