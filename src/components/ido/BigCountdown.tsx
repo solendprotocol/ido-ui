@@ -26,28 +26,18 @@ const CountdownBlock: React.FC<CountdownBlockProps> = ({ count, label }) => {
 
 interface BigCountdownProps {
   date: moment.Moment
-  className?: string
   onComplete: () => void
 }
 
-const BigCountdown: React.FC<BigCountdownProps> = ({
-  className,
-  date,
-  onComplete,
-}) => {
+const BigCountdown: React.FC<BigCountdownProps> = ({ date, onComplete }) => {
   const renderCountdown = ({ days, hours, minutes, seconds, completed }) => {
     return (
-      <div
-        className={classNames(
-          className,
-          'flex items-center justify-center mb-10 sm:mb-16'
-        )}
-      >
+      <section className="flex items-center justify-center mb-10 sm:mb-16">
         <CountdownBlock count={days} label="DAYS" />
         <CountdownBlock count={hours} label="HOURS" />
         <CountdownBlock count={minutes} label="MINS" />
         <CountdownBlock count={seconds} label="SECS" />
-      </div>
+      </section>
     )
   }
 

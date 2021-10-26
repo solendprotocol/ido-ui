@@ -23,12 +23,14 @@ const CardBase: React.FC<{
 
   let mobileCta =
     IDO_STARTS.isAfter() || startIdo?.isAfter() ? (
-      <Col className="w-full text-center">
-        <Typography>Begins in:</Typography>
-        <BigCountdown
-          date={IDO_STARTS ?? startIdo}
-          onComplete={doForceRefresh}
-        />
+      <Col span={24} key="countdown">
+        <section className="w-full text-center mt-0">
+          <Typography>Begins in</Typography>
+          <BigCountdown
+            date={IDO_STARTS ?? startIdo}
+            onComplete={doForceRefresh}
+          />
+        </section>
       </Col>
     ) : (
       <Col span={24}>
@@ -98,8 +100,8 @@ const CardBase: React.FC<{
         </Typography>
       </Col>
       {isMobile && mobileCta}
-      <Col span={24}>
-        <div className="card w-full">
+      <Col key="howto" span={24}>
+        <div key="howto" className="greyCard w-full">
           <Typography level="headline">How it works</Typography>
           <br />
           <Typography color="secondary">
@@ -115,8 +117,8 @@ const CardBase: React.FC<{
           </Typography>
         </div>
       </Col>
-      <Col span={24}>
-        <div className="card w-full">
+      <Col key="dates" span={24}>
+        <div key="dates" className="greyCard w-full">
           <Typography level="headline">Timeline</Typography>
           <Typography className="date">
             {/* {startIdo?.utc()?.format('MMM DD HH:mma')} UTC */}
