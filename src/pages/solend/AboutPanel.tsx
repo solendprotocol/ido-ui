@@ -93,7 +93,7 @@ const CardBase: React.FC<{
           <Typography
             level="display"
             color="brand"
-            className="inline-block idoText"
+            className="inline-block idoText mb-0"
           >
             IDO
           </Typography>
