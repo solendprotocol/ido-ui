@@ -279,6 +279,18 @@ const CardBase: React.FC<{
               <img src="/partners/dcfgod.png" />
             </a>
           </Col>
+          <Col flex="150px">
+              <img src="/partners/epsilon.png" />
+          </Col>
+          <Col flex="150px">
+            <a
+              target="_blank"
+              href="https://petrock.capital/"
+              rel="noreferrer"
+            >
+              <img src="/partners/petrock.png" />
+            </a>
+          </Col>
         </Row>
       </Col>
       <Col span={24} className="m-1" />
