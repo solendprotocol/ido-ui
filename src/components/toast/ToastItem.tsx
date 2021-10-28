@@ -48,6 +48,8 @@ const ToastItem: React.FC<ToastItemProps> = ({
     }
   }, [timer, duration, handleRemove])
 
+  // TODO: REMOVE DURING PROD
+  return null
   return (
     <CSSTransition nodeRef={ref} timeout={100000} style={style} {...props}>
       <div
