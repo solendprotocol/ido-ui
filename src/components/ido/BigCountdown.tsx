@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import moment from 'moment'
 import Countdown from 'react-countdown'
 

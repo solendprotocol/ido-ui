@@ -155,13 +155,13 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         <RowMetric
           label="Your USDC contribution"
           value={formatToken(contributeBalance, 4, true)}
-          className="card"
+          className="greyCard"
         />
       )}
       <RowMetric
         label="Redeemable SLND"
         value={formatToken(redeemableSlndAmount, 4, true)}
-        className="card"
+        className="greyCard"
       />
       <Button
         onClick={handleRedeem}

@@ -8,6 +8,7 @@ import { XIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { useCallback } from 'react'
 
+import Typography from '../typography/Typography'
 import { ToastContentProps, ToastTypes } from './types'
 
 let globalId = 0
@@ -44,40 +45,29 @@ const ToastContent: React.FC<ToastContentProps> = ({
 
   return (
     <div
-      className="toast-shadow rounded bg-white p-4 text-sm flex flex-col"
+      className="toast-shadow rounded bg-default p-4 text-sm flex flex-col"
       key={nextId()}
     >
       <div className="absolute -right-2 -top-2">
         <button
           onClick={handleClose}
-          className="bg-brandPrimary p-1 text-white rounded-full inline-flex outline-none focus:outline-none"
+          className="bg-brandPrimary p-1 text-black rounded-full inline-flex outline-none focus:outline-none toastClose"
         >
           <span className="sr-only">Close</span>
           <XIcon className="w-5 h-5" />
         </button>
       </div>
       <div className="flex flex-row items-center">
-        <div
-          className={classNames(
-            'text-white text-xs h-7 w-7 mr-3 rounded-full flex-grow-0 flex-shrink-0 flex items-center justify-center',
-            {
-              'bg-success': type === ToastTypes.SUCCESS,
-              'bg-failure': type === ToastTypes.FAILURE,
-              'bg-warning': type === ToastTypes.WARNING,
-              'bg-brandSecondary': type === ToastTypes.INFO,
-            }
-          )}
-        >
-          {Icon}
-        </div>
-        <h5 className="font-bold text-md">{title}</h5>
+        <Typography level="headline">{title}</Typography>
       </div>
       {!!message && (
         <div className="mt-1 space-y-1 leading-snug w-full overflow-hidden break-words">
-          {message.split('\n').map((i, key) => {
-            return <div key={key}>{i}</div>
-          })}
-          {children}
+          <Typography level="caption" color="secondary">
+            {message.split('\n').map((i, key) => {
+              return <div key={key}>{i}</div>
+            })}
+            {children}
+          </Typography>
         </div>
       )}
       {action && (
@@ -87,7 +77,9 @@ const ToastContent: React.FC<ToastContentProps> = ({
           rel="noreferrer"
           className="text-brandPrimary mt-2"
         >
-          {action.text}
+          <Typography level="caption" color="secondary">
+            {action.text}
+          </Typography>
         </a>
       )}
     </div>

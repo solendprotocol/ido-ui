@@ -37,8 +37,8 @@ const Main: React.FC<{
 
   return (
     <>
-      <Row justify="center" align="middle" className="actionCardHolder">
-        <Col>{poolCard}</Col>
+      <Row justify="center" className="actionCardHolder">
+        <Col className="poolCard">{poolCard}</Col>
       </Row>
     </>
   )

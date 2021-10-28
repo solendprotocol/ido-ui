@@ -280,14 +280,10 @@ const CardBase: React.FC<{
             </a>
           </Col>
           <Col flex="150px">
-              <img src="/partners/epsilon.png" />
+            <img src="/partners/epsilon.png" />
           </Col>
           <Col flex="150px">
-            <a
-              target="_blank"
-              href="https://petrock.capital/"
-              rel="noreferrer"
-            >
+            <a target="_blank" href="https://petrock.capital/" rel="noreferrer">
               <img src="/partners/petrock.png" />
             </a>
           </Col>
