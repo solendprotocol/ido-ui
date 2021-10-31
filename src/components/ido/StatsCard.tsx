@@ -40,7 +40,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
         value={
           <>
             {estimatedPrice && !estimatedPrice.isNaN() ? (
-              <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+              <>{formatToken(estimatedPrice.toString(), 4, true)} USDC</>
             ) : (
               '-'
             )}

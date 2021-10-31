@@ -20,7 +20,9 @@ export function formatToken(
     bn.isLessThan(1 / 10 ** digits) &&
     !bn.isLessThanOrEqualTo(new BigNumber(0))
   ) {
-    return `< ${1 / 10 ** digits}`
+    return <Tooltip title={formatExact(value)}>
+      {`< ${1 / 10 ** digits}`}
+    </Tooltip>
   }
 
   const usedValue = round ? value : bn.toFormat(digits, 1)
