@@ -1,19 +1,15 @@
 import 'antd/dist/antd.css'
 
-import { Col, Drawer, Row } from 'antd'
+import { Col, Row } from 'antd'
 import React, { useState } from 'react'
 
-import { Button } from '../components/button'
 import { Footer } from '../components/footer'
 import { Header } from '../components/header'
 import useDeviceMode from '../hooks/useDeviceMode'
-import usePool from '../hooks/usePool'
-import useWalletStore from '../stores/useWalletStore'
 import AboutPanel from './solend/AboutPanel'
 import ActionPanel from './solend/ActionPanel'
 
 const Page: React.FC = () => {
-  const pool = useWalletStore((s) => s.pools)[0]
   const [drawerVisible, setDrawerVisible] = useState(false)
   const { xl, isMobile } = useDeviceMode()
 

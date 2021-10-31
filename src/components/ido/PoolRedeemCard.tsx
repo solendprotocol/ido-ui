@@ -151,13 +151,13 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
         tooltip="Token price is calculated by dividing the total USDC raised by the amount of tokens for sale."
       />
       <Col className="m-1" />
-      {contributeBalance && contributeBalance > 0 && (
+      {contributeBalance && contributeBalance > 0 ? (
         <RowMetric
           label="Your USDC contribution"
           value={formatToken(contributeBalance, 4, true)}
           className="greyCard"
         />
-      )}
+      ) : null}
       <RowMetric
         label="Redeemable SLND"
         value={formatToken(redeemableSlndAmount, 4, true)}
