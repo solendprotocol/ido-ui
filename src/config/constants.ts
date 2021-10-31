@@ -56,25 +56,14 @@ export const RPC_ENDPOINTS: WalletEndpoint[] = [
   },
 ]
 
-export const IDO_RESULTS = {
-  F2TkNeTKE1BdEaXo54E5rJxHx7bbpUBiUFNLH2WtwN1N: {
-    contributed: 3500000,
-    allocation: new BigNumber(2000000),
-  },
-}
+export const IDO_RESULTS = {}
 
 export const IDO_ENDPOINTS = [
   {
     network: 'mainnet-beta' as web3.Cluster,
-    programId: '8SBvVZtJbHPQVhbsmQz8c4Msyj2i1WYrigMEi2BY2YHH',
+    programId: 'CyZ1SrCwv33hqMU8Shx6E1GhrY3PJ8yCcaMko5RpKaxt',
     usdcMint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-    pools: ['F2TkNeTKE1BdEaXo54E5rJxHx7bbpUBiUFNLH2WtwN1N'],
-  },
-  {
-    network: 'devnet' as web3.Cluster,
-    programId: '8SBvVZtJbHPQVhbsmQz8c4Msyj2i1WYrigMEi2BY2YHH',
-    usdcMint: 'BoKaqcjcRgbaciV33odD1rMrtz29wh5HFFVmSFBMTZhQ',
-    pools: ['F2TkNeTKE1BdEaXo54E5rJxHx7bbpUBiUFNLH2WtwN1N'],
+    pools: ['9ovxEpihFJNFhrpqNVg8HSDhtEG4CHneuRuyM9A6s9KV'],
   },
 ]
 
