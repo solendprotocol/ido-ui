@@ -78,10 +78,18 @@ export function formatUSD(
 
 // e.g. 2.3M or 4.3K
 export function formatRoundedUSD(value: string | number): string {
-  return `$${numbro(value).format({
-    average: true,
-    totalLength: 3,
-  })}`.toUpperCase()
+  const fullNum = Intl.NumberFormat('en', {
+    notation: 'compact',
+    minimumFractionDigits: 1,
+  }).format(Number(value))
+
+  const firstPart = fullNum.split('.')[0]
+  console.log(firstPart, firstPart.length)
+  return Intl.NumberFormat('en', {
+    notation: 'compact',
+    minimumFractionDigits: 3 - firstPart.length,
+    maximumFractionDigits: 3 - firstPart.length,
+  }).format(Number(value))
 }
 
 export function formatPercent(value: string | number, noTrim?: boolean) {

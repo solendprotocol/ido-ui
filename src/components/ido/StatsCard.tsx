@@ -2,7 +2,11 @@ import { Col, Row, Tooltip } from 'antd'
 import BigNumber from 'bignumber.js'
 import React from 'react'
 
-import { formatToken, formatUSD } from '../../utils/numberFormatter'
+import {
+  formatRoundedUSD,
+  formatToken,
+  formatUSD,
+} from '../../utils/numberFormatter'
 import { TokenIcon } from '../icons'
 import NumberText from '../texts/Number'
 import Typography from '../typography/Typography'
@@ -37,6 +41,26 @@ const StatsCard: React.FC<StatsCardProps> = ({
           <>
             {estimatedPrice && !estimatedPrice.isNaN() ? (
               <>${formatToken(estimatedPrice.toString(), 4, true)}</>
+            ) : (
+              '-'
+            )}
+          </>
+        }
+      />
+      <RowMetric
+        label="Implied fully diluted market cap"
+        tooltip="The SLND token supply will be 100,000,000 once fully distributed into circulation. This is the implied token price multiplied by that max total supply."
+        value={
+          <>
+            {estimatedPrice && !estimatedPrice.isNaN() ? (
+              <>
+                $
+                {formatRoundedUSD(
+                  estimatedPrice
+                    .multipliedBy(new BigNumber(100000000))
+                    .toString()
+                )}
+              </>
             ) : (
               '-'
             )}

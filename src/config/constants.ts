@@ -13,10 +13,9 @@ export const IDO_STARTS = moment.utc(1635768000000)
 
 export const RPC_ENDPOINTS: WalletEndpoint[] = [
   {
-    id: 'quicknode',
+    id: 'solend',
     network: 'mainnet-beta' as web3.Cluster,
-    rpcURL:
-      'https://wispy-shy-sun.solana-mainnet.quiknode.pro/89cfe785b014007e7ee4c5f2ee5bb5572b4735db/',
+    rpcURL: 'https://rpc.solend.fi',
     rpcName: 'Solend Node 1',
     commitment: 'processed',
   },
@@ -79,4 +78,4 @@ export const IDO_ENDPOINTS = [
   },
 ]
 
-export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'quicknode')
+export const DEFAULT_RPC = RPC_ENDPOINTS.find((i) => i.id === 'solend')

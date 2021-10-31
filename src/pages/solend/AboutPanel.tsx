@@ -16,7 +16,7 @@ const CardBase: React.FC<{
   setDrawerVisible: (arg: boolean) => void
 }> = ({ setDrawerVisible }) => {
   const pool = useWalletStore((s) => s.pools)[0]
-  const { startIdo, endDeposits, endIdo, startRedeem } = usePool(pool)
+  const { startIdo, endIdo } = usePool(pool)
   const { isMobile } = useDeviceMode()
   const { doForceRefresh } = useRefresh()
   const countryCode = useCountry()
@@ -38,7 +38,7 @@ const CardBase: React.FC<{
           onClick={() => setDrawerVisible(true)}
           className="w-full participate primaryBtnColors"
         >
-          Participate
+          {endIdo ? 'Redeem' : 'Participate'}
         </Button>
       </Col>
     )

@@ -1,11 +1,8 @@
-import { Col, Drawer, Row } from 'antd'
-import React from 'react'
+import { Col, Row } from 'antd'
+import React, { useState } from 'react'
 
-import { Button } from '../../components/button'
 import PoolCard from '../../components/ido/PoolCard'
 import { IDO_STARTS } from '../../config/constants'
-import { DISALLOWED_COUNTRIES, useCountry } from '../../hooks/useCountry'
-import useDeviceMode from '../../hooks/useDeviceMode'
 import usePool from '../../hooks/usePool'
 import useWalletStore from '../../stores/useWalletStore'
 import Countdown from './ActionTabs/Countdown'
@@ -15,11 +12,11 @@ const Main: React.FC<{
   setDrawerVisible: (arg: boolean) => void
 }> = ({ setDrawerVisible }) => {
   const pool = useWalletStore((s) => s.pools)[0]
+  const [acceptedDisclaimer, setAcceptedDisclaimer] = useState<boolean>(false)
   const { startIdo } = usePool(pool)
-  const countryCode = useCountry()
 
-  if (DISALLOWED_COUNTRIES.includes(countryCode ?? '')) {
-    return <ProhibitedScreen />
+  if (!acceptedDisclaimer) {
+    return <ProhibitedScreen setAcceptedDisclaimer={setAcceptedDisclaimer} />
   }
 
   if (IDO_STARTS.isAfter() || !startIdo || startIdo?.isAfter()) {
