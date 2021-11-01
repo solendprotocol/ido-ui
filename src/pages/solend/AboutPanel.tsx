@@ -109,7 +109,7 @@ const CardBase: React.FC<{
             <br />
             <br />
             Afterwards, depositors can redeem an amount of SLND tokens
-            proprotional to their share of the pool.
+            proportional to their share of the pool.
           </Typography>
         </div>
       </Col>
