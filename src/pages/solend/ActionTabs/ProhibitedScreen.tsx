@@ -22,15 +22,11 @@ const Countdown: React.FC<{
       Iran, Liberia, North Korea, Syria, Sudan, South Sudan, Zimbabwe, Antigua,
       United States, American Samoa, Guam, Northern Mariana Islands, Puerto
       Rico, United States Minor Outlying Islands, US Virgin Islands, Ukraine,
-      Belarus,, Albania, Burma, Central African Republic, Democratic Republic of
+      Belarus, Albania, Burma, Central African Republic, Democratic Republic of
       Congo, Lybia, Somalia, Yemen, United Kingdom, Thailand.
       <br />
       If you think your access is restricted by mistake or have another
       question, please contact us via{' '}
-      <a href="mailto:team@solend.fi">
-        <u>Email</u>
-      </a>
-      ,{' '}
       <a
         target="_blank"
         href="https://twitter.com/solendprotocol"
@@ -53,7 +49,7 @@ const Countdown: React.FC<{
       Afghanistan, Ivory Coast, Cuba, Iraq, Iran, Liberia, North Korea, Syria,
       Sudan, South Sudan, Zimbabwe, Antigua, United States, American Samoa,
       Guam, Northern Mariana Islands, Puerto Rico, United States Minor Outlying
-      Islands, US Virgin Islands, Ukraine, Belarus,, Albania, Burma, Central
+      Islands, US Virgin Islands, Ukraine, Belarus, Albania, Burma, Central
       African Republic, Democratic Republic of Congo, Lybia, Somalia, Yemen,
       United Kingdom, Thailand.
       <br />
