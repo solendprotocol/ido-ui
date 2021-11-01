@@ -84,9 +84,7 @@ export function formatRoundedUSD(value: string | number): string {
     notation: 'compact',
     minimumFractionDigits: 1,
   }).format(Number(value))
-
   const firstPart = fullNum.split('.')[0]
-  console.log(firstPart, firstPart.length)
   return Intl.NumberFormat('en', {
     notation: 'compact',
     minimumFractionDigits: 3 - firstPart.length,

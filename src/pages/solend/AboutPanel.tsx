@@ -16,7 +16,7 @@ const CardBase: React.FC<{
   setDrawerVisible: (arg: boolean) => void
 }> = ({ setDrawerVisible }) => {
   const pool = useWalletStore((s) => s.pools)[0]
-  const { startIdo, endIdo } = usePool(pool)
+  const { startIdo, endIdo, endDeposits, startRedeem } = usePool(pool)
   const { isMobile } = useDeviceMode()
   const { doForceRefresh } = useRefresh()
   const countryCode = useCountry()
@@ -38,7 +38,7 @@ const CardBase: React.FC<{
           onClick={() => setDrawerVisible(true)}
           className="w-full participate primaryBtnColors"
         >
-          {endIdo ? 'Redeem' : 'Participate'}
+          {endIdo?.isBefore() ? 'Redeem' : 'Participate'}
         </Button>
       </Col>
     )
@@ -54,10 +54,6 @@ const CardBase: React.FC<{
           <br />
           If you think your access is restricted by mistake or have another
           question, please contact us via{' '}
-          <a href="mailto:team@solend.fi">
-            <u>Email</u>
-          </a>
-          ,{' '}
           <a
             target="_blank"
             href="https://twitter.com/solendprotocol"
@@ -121,8 +117,8 @@ const CardBase: React.FC<{
         <div key="dates" className="greyCard w-full">
           <Typography level="headline">Timeline</Typography>
           <Typography className="date">
-            {/* {startIdo?.utc()?.format('MMM DD HH:mma')} UTC */}
-            {moment('2021-11-01T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC
+            {startIdo?.utc()?.format('MMM DD HH:mma')} UTC
+            {/* {moment('2021-11-01T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC */}
           </Typography>{' '}
           {isMobile && <br />}
           <Typography color="secondary">
@@ -130,8 +126,8 @@ const CardBase: React.FC<{
           </Typography>
           <br />
           <Typography className="date">
-            {/* {endDeposits?.utc()?.format('MMM DD HH:mma')} UTC */}
-            {moment('2021-11-02T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC
+            {endDeposits?.utc()?.format('MMM DD HH:mma')} UTC
+            {/* {moment('2021-11-02T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC */}
           </Typography>{' '}
           {isMobile && <br />}
           <Typography color="secondary">
@@ -139,15 +135,15 @@ const CardBase: React.FC<{
           </Typography>
           <br />
           <Typography className="date">
-            {/* {endIdo?.utc()?.format('MMM DD HH:mma')} UTC */}
-            {moment('2021-11-03T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC
+            {endIdo?.utc()?.format('MMM DD HH:mma')} UTC
+            {/* {moment('2021-11-03T12:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC */}
           </Typography>{' '}
           {isMobile && <br />}
           <Typography color="secondary">IDO ends</Typography>
           <br />
           <Typography className="date">
-            {/* {startRedeem?.utc()?.format('MMM DD HH:mma')} UTC */}
-            {moment('2021-11-03T16:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC
+            {startRedeem?.utc()?.format('MMM DD HH:mma')} UTC
+            {/* {moment('2021-11-03T16:00:00Z')?.utc()?.format('MMM DD HH:mma')} UTC */}
           </Typography>{' '}
           {isMobile && <br />}
           <Typography color="secondary">Tokens redeemable</Typography>

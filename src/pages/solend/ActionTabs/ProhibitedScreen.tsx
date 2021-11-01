@@ -55,10 +55,6 @@ const Countdown: React.FC<{
       <br />
       <br />
       If you have any questions, please contact us via{' '}
-      <a href="mailto:team@solend.fi">
-        <u>Email</u>
-      </a>
-      ,{' '}
       <a
         target="_blank"
         href="https://twitter.com/solendprotocol"

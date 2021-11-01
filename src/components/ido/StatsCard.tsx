@@ -71,7 +71,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
       <RowMetric
         label="Your USDC deposit"
         value={formatToken(userUsdcDeposits, 4, true)}
-        className="card"
+        className="greyCard"
       />
       <RowMetric
         label="Your SLND allocation"
@@ -87,7 +87,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
             : '-'
         }
         tooltip="Based on current total contributions to the vault, this is what you'll receive. This is subject to change as the contribution pool size changes."
-        className="card"
+        className="greyCard"
       />
     </Row>
   )
