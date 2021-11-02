@@ -2,7 +2,7 @@ import { InformationCircleIcon } from '@heroicons/react/outline'
 import { Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
-import ReactMomentCountDown from 'react-moment-countdown'
+import Countdown from 'react-countdown'
 
 import useDeviceMode from '../../hooks/useDeviceMode'
 // import useIpAddress from '../../hooks/useIpAddress's
@@ -16,7 +16,6 @@ import { Button } from '../button'
 import { AmountInput } from '../input/AmountInput'
 import { ButtonMenu, ButtonMenuItem } from '../menu'
 import Typography from '../typography/Typography'
-import Countdown from './Countdown'
 import StatsCard from './StatsCard'
 
 interface PoolContribCardProps {
@@ -177,11 +176,13 @@ const PoolContribCard: React.FC<PoolContribCardProps> = ({
     <Row justify="center" className="modal">
       {canDeposit ? (
         <Typography className="contributeCountdown">
-          Sale period ends in <ReactMomentCountDown toDate={endDeposits} />
+          Sale period ends in{' '}
+          <Countdown date={new Date(endDeposits.toLocaleString())} />
         </Typography>
       ) : (
         <Typography className="contributeCountdown">
-          Grace period ends in <ReactMomentCountDown toDate={endIdo} />
+          Grace period ends in{' '}
+          <Countdown date={new Date(endIdo.toLocaleString())} />
         </Typography>
       )}
       <AmountInput
