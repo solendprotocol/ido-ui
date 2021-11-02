@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import ReactMomentCountDown from 'react-moment-countdown'
+import Countdown from 'react-countdown'
 
 import { IDO_RESULTS } from '../../config/constants'
 import useLargestAccounts from '../../hooks/useLargestAccounts'
@@ -13,9 +13,7 @@ import { calculateBalance, calculateSupply } from '../../utils/balance'
 import { formatToken, formatUSD } from '../../utils/numberFormatter'
 import { Button } from '../button'
 import { TokenIcon } from '../icons'
-import NumberText from '../texts/Number'
 import Typography from '../typography/Typography'
-import PoolCountdown from './PoolCountdown'
 import RowMetric from './RowMetric'
 
 interface PoolRedeemCardProps {
@@ -96,7 +94,7 @@ const PoolRedeemCard: React.FC<PoolRedeemCardProps> = ({ pool }) => {
       {startRedeem.isAfter() && (
         <Typography className="redeemCountdown">
           You can redeem your token in{' '}
-          <ReactMomentCountDown toDate={startRedeem} />
+          <Countdown date={new Date(startRedeem.toLocaleString())} />
         </Typography>
       )}
       <Col span={24} className="text-center	">
