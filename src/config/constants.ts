@@ -56,7 +56,12 @@ export const RPC_ENDPOINTS: WalletEndpoint[] = [
   },
 ]
 
-export const IDO_RESULTS = {}
+export const IDO_RESULTS = {
+  '9ovxEpihFJNFhrpqNVg8HSDhtEG4CHneuRuyM9A6s9KV': {
+    contributed: 26274440.451072,
+    allocation: new BigNumber(4000000),
+  },
+}
 
 export const IDO_ENDPOINTS = [
   {
